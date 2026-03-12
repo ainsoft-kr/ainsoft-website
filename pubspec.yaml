@@ -1,0 +1,41 @@
+name: getx_starter
+description: A new Flutter project.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.41.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_modular: ^6.4.1
+  loader_overlay: ^5.0.0
+  flutter_spinkit: ^5.2.2
+  connectivity_plus: ^7.0.0
+  flutter_svg: ^2.2.4
+  get_storage: ^2.1.1
+  google_fonts: ^8.0.2
+  intl: ^0.20.2
+  sentry: ^9.14.0
+  timeago: ^3.7.1
+  jwt_decoder: ^2.0.1
+  path_provider: ^2.1.5
+  flutter_secure_storage: ^10.0.0
+  responsive_framework: ^1.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
