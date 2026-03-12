@@ -95,6 +95,10 @@ class _AppShellHeader extends StatelessWidget {
         route: RouteManager.solutionsRoute,
       ),
       const _AppShellNavItem(
+        label: 'Services',
+        route: RouteManager.servicesRoute,
+      ),
+      const _AppShellNavItem(
         label: 'Contact',
         route: RouteManager.contactRoute,
       ),
@@ -354,7 +358,7 @@ class _FooterBrandBlock extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          '기업 소개, 제품 소개, 솔루션 설명, 문의 전환까지 일관된 흐름으로 구성하는 웹 홈페이지 템플릿입니다.',
+          'AINSOFT는 운영 자동화, 지식검색, 멀티모달 AI 서비스를 연결해 제조와 조선 현장의 문제를 더 현실적인 구조로 해결합니다.',
           style: GoogleFonts.dmSans(
             fontSize: 14,
             height: 1.7,
@@ -378,6 +382,7 @@ class _FooterLinkBlock extends StatelessWidget {
       (label: 'About', route: RouteManager.aboutRoute),
       (label: 'Products', route: RouteManager.productsRoute),
       (label: 'Solutions', route: RouteManager.solutionsRoute),
+      (label: 'Services', route: RouteManager.servicesRoute),
       (label: 'Contact', route: RouteManager.contactRoute),
     ];
 

@@ -5,6 +5,7 @@ import '/modules/about/views/about_page.dart';
 import '/modules/contact/views/contact_page.dart';
 import '/modules/home/views/home_page.dart';
 import '/modules/products/views/products_page.dart';
+import '/modules/services/views/services_page.dart';
 import '/modules/solutions/views/solutions_page.dart';
 import '/shared/modules/app_shell/app_shell_page.dart';
 
@@ -37,6 +38,11 @@ class AppModule extends Module {
         ChildRoute(
           '/solutions',
           child: (_) => const SolutionsPage(),
+          transition: TransitionType.noTransition,
+        ),
+        ChildRoute(
+          '/services',
+          child: (_) => const ServicesPage(),
           transition: TransitionType.noTransition,
         ),
         ChildRoute(

@@ -10,6 +10,10 @@ class ProductsPage extends StatelessWidget {
       children: [
         ProductsOverviewSection(),
         ProductsValueSection(),
+        ProductsAisopsflowSection(),
+        ProductsRagSection(),
+        ProductsFitSection(),
+        ProductsOpenSourceSection(),
         ProductsMetricsSection(),
         ProductsActionSection(),
       ],

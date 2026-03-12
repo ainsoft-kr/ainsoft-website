@@ -13,9 +13,9 @@ class AboutOverviewSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'About',
-      title: '회사 소개는 신뢰와 방향성을 동시에 전달해야 합니다.',
+      title: 'AINSOFT는 운영 자동화와 지식검색을 제품으로 만듭니다.',
       description:
-          '기업 방문자가 가장 먼저 확인하는 것은 무엇을 만드는지보다 어떤 회사인지입니다. 핵심 가치, 구축 경험, 운영 방식이 짧고 선명하게 보여야 합니다.',
+          '복잡한 운영을 더 빠른 판단과 더 안전한 실행으로 바꾸기 위해 AISOpsFlow와 Ainsoft RAG를 설계했습니다. 제품의 구조만큼 실제 도입 가능성도 중요하게 생각합니다.',
       child: _InfoCards(cards: controller.overviewCards),
     );
   }
@@ -30,8 +30,9 @@ class AboutStrengthSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Core Strength',
-      title: '소개 페이지에서 바로 보여줘야 하는 핵심 역량입니다.',
-      description: '회사 소개는 추상적인 문장보다 실제로 어떤 점이 강한지 구조적으로 보이는 편이 낫습니다.',
+      title: '현장에서 바로 쓸 수 있는 구조로 설계합니다.',
+      description:
+          '보안 경계를 고려한 실행 구조, 애플리케이션 안으로 들어가는 검색 구조, 그리고 빠른 도입을 위한 현실적인 제안 방식이 AINSOFT의 강점입니다.',
       dark: true,
       actionLabel: '문의하기',
       actionRoute: RouteManager.contactRoute,
@@ -49,8 +50,9 @@ class AboutSnapshotSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Snapshot',
-      title: '간단한 수치 정보도 신뢰 형성에 도움이 됩니다.',
-      description: '정확한 운영 수치가 아직 없어도, 구조적으로 어떤 메시지를 둘지 먼저 정리해두는 것이 중요합니다.',
+      title: '핵심 방향은 단순하고 분명합니다.',
+      description:
+          '두 개의 제품, 하나의 운영 전략. 자동화와 지식검색을 함께 설계해 더 나은 운영 경험을 만드는 것이 AINSOFT가 지향하는 방향입니다.',
       child: _MetricCards(metrics: controller.snapshotMetrics),
     );
   }
@@ -62,9 +64,9 @@ class AboutActionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CorporateActionBanner(
-      title: 'About 페이지는 회사 설명이 아니라 신뢰를 설계하는 페이지입니다.',
+      title: 'AINSOFT의 제품과 접근 방식을 더 자세히 확인해보세요.',
       description:
-          '회사 정체성과 도입 신뢰를 더 구체적으로 정리하려면 제품 구조와 솔루션 페이지까지 함께 이어서 설계해야 합니다.',
+          'Products에서는 제품 구조를, Solutions에서는 실제 적용 장면을 확인할 수 있습니다. 도입 상담도 바로 이어서 진행할 수 있습니다.',
       primaryLabel: 'Products 보기',
       primaryRoute: RouteManager.productsRoute,
       secondaryLabel: '문의하기',

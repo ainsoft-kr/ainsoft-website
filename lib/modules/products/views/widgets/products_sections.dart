@@ -13,9 +13,9 @@ class ProductsOverviewSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Products',
-      title: '제품 페이지는 기능 목록보다 도입 포인트가 먼저 보여야 합니다.',
+      title: 'AISOpsFlow와 Ainsoft RAG, 서로 다른 역할의 두 제품 라인업.',
       description:
-          '방문자는 모든 기능을 읽지 않습니다. 제품이 어떤 문제를 해결하는지, 어떤 운영 이점을 만드는지, 누가 바로 이해할 수 있는지가 더 중요합니다.',
+          '운영 자동화 플랫폼과 내장형 RAG 엔진 제품군. AINSOFT는 실행 자동화와 지식검색이라는 두 축을 각기 다른 제품으로 제공합니다.',
       child: _InfoCards(cards: controller.productCards),
     );
   }
@@ -30,8 +30,9 @@ class ProductsValueSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Value',
-      title: '제품 설명은 결국 고객 가치 중심으로 정리되어야 합니다.',
-      description: '같은 기능도 어떤 맥락에서 설명하느냐에 따라 제품 이해 속도와 문의 전환율이 달라집니다.',
+      title: '실행 시스템과 검색 시스템, 각자의 역할에 맞게 설계했습니다.',
+      description:
+          'AISOpsFlow는 하이브리드 실행 구조와 플러그인 확장성으로, Ainsoft RAG는 엔진과 검색 파이프라인, Spring Boot starter 구성으로 차별화됩니다.',
       dark: true,
       actionLabel: 'Solutions 보기',
       actionRoute: RouteManager.solutionsRoute,
@@ -49,10 +50,79 @@ class ProductsMetricsSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Product Metrics',
-      title: '제품 페이지에 필요한 구조적 지표 예시입니다.',
+      title: '핵심 구조를 한눈에 보여주는 제품 축.',
       description:
-          '실서비스 수치가 정리되면 이 자리에는 실제 고객 수, 적용 도메인, 기능 도입 범위를 연결할 수 있습니다.',
+          '제품의 중심이 되는 구조와 통합 포인트를 짧고 선명하게 정리했습니다. 각 제품의 성격이 다르다는 점이 바로 드러납니다.',
       child: _MetricCards(metrics: controller.metrics),
+    );
+  }
+}
+
+class ProductsAisopsflowSection extends StatelessWidget {
+  const ProductsAisopsflowSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = ProductsViewModel();
+
+    return CorporatePageSection(
+      label: 'AISOpsFlow',
+      title: '보안 경계를 유지한 채 운영 자동화를 실행합니다.',
+      description:
+          '클라우드 Core와 온프레미스 Runner를 분리해 두고, 승인과 실행, 보고까지 이어지는 워크플로우를 안정적으로 운영할 수 있습니다.',
+      child: _InfoCards(cards: controller.aisopsflowCards),
+    );
+  }
+}
+
+class ProductsRagSection extends StatelessWidget {
+  const ProductsRagSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = ProductsViewModel();
+
+    return CorporatePageSection(
+      label: 'Ainsoft RAG',
+      title: '서비스 안에 바로 넣을 수 있는 내장형 RAG 엔진 제품군.',
+      description:
+          '검색 엔진, 파이프라인 모듈, starter 제품군을 통해 운영 포털과 업무 시스템 안에 지식검색 경험을 자연스럽게 녹여낼 수 있습니다.',
+      dark: true,
+      child: _InfoCards(cards: controller.ragCards),
+    );
+  }
+}
+
+class ProductsFitSection extends StatelessWidget {
+  const ProductsFitSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = ProductsViewModel();
+
+    return CorporatePageSection(
+      label: 'Product Fit',
+      title: '단독으로도 강하고, 함께 쓰면 더 선명합니다.',
+      description:
+          'AISOpsFlow는 실행 자동화를, Ainsoft RAG는 지식검색을 담당합니다. 역할이 분리되어 있기 때문에 더 유연하게 조합할 수 있습니다.',
+      child: _InfoCards(cards: controller.productFitCards),
+    );
+  }
+}
+
+class ProductsOpenSourceSection extends StatelessWidget {
+  const ProductsOpenSourceSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = ProductsViewModel();
+
+    return CorporatePageSection(
+      label: 'Open Source',
+      title: '오픈소스 자산도 함께 공개합니다.',
+      description:
+          'Ainsoft RAG는 Spring Boot starter 계열 저장소를, AISOpsFlow는 plugin SDK 와 catalog 저장소를 공개하고 있습니다. 확장 포인트와 통합 자산을 직접 확인할 수 있습니다.',
+      child: _InfoCards(cards: controller.openSourceCards),
     );
   }
 }
@@ -63,8 +133,9 @@ class ProductsActionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CorporateActionBanner(
-      title: '제품 페이지는 상세 소개이면서 동시에 영업 자료의 첫 화면 역할을 해야 합니다.',
-      description: '문제 해결 시나리오까지 이어지면 제품 이해가 더 빨라집니다. 다음 단계는 솔루션 페이지 정리입니다.',
+      title: '도입 환경에 맞는 제품 구성을 설계해보세요.',
+      description:
+          '운영 자동화가 필요한지, 지식검색이 필요한지, 혹은 두 제품의 조합이 필요한지에 따라 가장 적합한 구성을 제안합니다.',
       primaryLabel: 'Solutions 보기',
       primaryRoute: RouteManager.solutionsRoute,
       secondaryLabel: '문의하기',

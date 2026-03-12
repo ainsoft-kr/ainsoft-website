@@ -6,6 +6,7 @@ import '/modules/about/views/about_page.dart';
 import '/modules/contact/views/contact_page.dart';
 import '/modules/home/views/home_page.dart';
 import '/modules/products/views/products_page.dart';
+import '/modules/services/views/services_page.dart';
 import '/modules/solutions/views/solutions_page.dart';
 import 'app_shell_layout.dart';
 
@@ -23,6 +24,7 @@ class SiteShellPage extends StatelessWidget {
           RouteManager.aboutRoute => const AboutPage(),
           RouteManager.productsRoute => const ProductsPage(),
           RouteManager.solutionsRoute => const SolutionsPage(),
+          RouteManager.servicesRoute => const ServicesPage(),
           RouteManager.contactRoute => const ContactPage(),
           _ => const HomePage(),
         },

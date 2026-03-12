@@ -14,51 +14,55 @@ class HomePage extends StatelessWidget {
         _HomeHeroSection(),
         _HomeTrustStrip(),
         CorporatePageSection(
-          label: 'About',
-          title: '회사 소개와 신뢰의 이유를 짧고 분명하게 전달합니다.',
+          label: 'Positioning',
+          title: '복잡한 운영을 자동화와 지식으로 더 단순하게 만듭니다.',
           description:
-              '브랜드 신뢰, 구축 경험, 제품 이해도를 한 흐름으로 보여주는 B2B 기업 홈페이지 구조입니다.',
+              'AISOpsFlow는 운영 이벤트를 실행 가능한 워크플로우로 바꾸고, Ainsoft RAG는 문서와 정책을 검색 가능한 지식 레이어로 만듭니다. AINSOFT는 두 제품을 통해 운영팀이 더 빠르게 판단하고 더 안전하게 실행하도록 돕습니다.',
           actionLabel: 'About 보기',
           actionRoute: RouteManager.aboutRoute,
           child: CorporateResponsiveWrap(
             children: [
               CorporateInfoCard(
-                title: '회사 소개',
-                body: '회사 정체성과 제공 가치를 방문자가 빠르게 이해할 수 있도록 구성합니다.',
+                title: '운영 자동화 축',
+                body: 'AISOpsFlow는 alerts, approval, actions, reporting을 하나의 흐름으로 연결해 반복적인 운영 절차를 표준화합니다.',
               ),
               CorporateInfoCard(
-                title: '핵심 역량',
-                body: '기술력, 구축 경험, 대응 속도 같은 핵심 강점을 명확하게 노출합니다.',
+                title: '지식검색 축',
+                body: 'Ainsoft RAG는 서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진으로 운영 문서와 정책을 빠르게 찾게 합니다.',
               ),
               CorporateInfoCard(
-                title: '신뢰 요소',
-                body: '연혁, 인증, 레퍼런스, 파트너십 등 신뢰 포인트를 체계적으로 보여줍니다.',
+                title: '통합 운영 경험',
+                body: '실행은 AISOpsFlow가 맡고, 검색과 근거 제공은 Ainsoft RAG가 맡아 운영팀이 하나의 흐름 안에서 대응할 수 있습니다.',
               ),
             ],
           ),
         ),
         CorporatePageSection(
           label: 'Products',
-          title: '제품 설명은 간결하게, 도입 포인트는 명확하게 구성합니다.',
-          description: '대표 제품군과 핵심 기능을 한눈에 정리해 방문자가 빠르게 이해할 수 있게 합니다.',
+          title: 'AISOpsFlow와 Ainsoft RAG, 서로 다른 역할의 두 제품 라인업.',
+          description:
+              'AISOpsFlow는 하이브리드 실행 구조와 플러그인 확장성으로, Ainsoft RAG는 임베디드 검색 엔진과 Spring Boot starter 구성으로 설계되었습니다.',
           dark: true,
           actionLabel: 'Products 보기',
           actionRoute: RouteManager.productsRoute,
           child: CorporateResponsiveWrap(
             children: [
               CorporateInfoCard(
-                title: 'Platform',
-                body: '대표 제품의 역할과 도입 포인트를 한 줄 메시지 중심으로 정리합니다.',
+                title: 'AISOpsFlow',
+                body: '운영 이벤트 이후 승인, 실행, 보고를 실제 워크플로우로 연결하는 운영 자동화 플랫폼입니다.',
+                accentLabel: 'Ops Automation',
                 dark: true,
               ),
               CorporateInfoCard(
-                title: 'Operations',
-                body: '운영 효율과 관리 편의성에 초점을 둔 제품 설명 구조를 제공합니다.',
+                title: 'Ainsoft RAG',
+                body: '서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진과 starter 제품군입니다.',
+                accentLabel: 'Knowledge Retrieval',
                 dark: true,
               ),
               CorporateInfoCard(
-                title: 'Analytics',
-                body: '성과와 지표 중심의 가치 전달이 가능하도록 제품 소개를 구성합니다.',
+                title: 'Together',
+                body: '하나는 실행 자동화를, 다른 하나는 지식검색을 담당해 단독으로도 명확하고 함께 쓸 때 더 강한 운영 경험을 제공합니다.',
+                accentLabel: 'Combined Value',
                 dark: true,
               ),
             ],
@@ -66,35 +70,37 @@ class HomePage extends StatelessWidget {
         ),
         CorporatePageSection(
           label: 'Solutions',
-          title: '기능보다 문제 해결 흐름이 먼저 보이도록 설계합니다.',
-          description: '산업별·업무별 시나리오를 중심으로 제품이 어떤 효과를 만드는지 보여줍니다.',
+          title: '현장의 운영 문제를 실제 흐름에 맞게 풀어냅니다.',
+          description:
+              '운영 이벤트 대응, 서비스데스크, 내부 지식검색, 온프레미스 환경까지 각 조직의 현실에 맞는 적용 시나리오를 제공합니다.',
           actionLabel: 'Solutions 보기',
           actionRoute: RouteManager.solutionsRoute,
           child: CorporateResponsiveWrap(
             children: [
               CorporateInfoCard(
-                title: 'B2B 소개형',
-                body: '회사와 제품을 명확하게 소개해야 하는 기업용 구조에 적합합니다.',
+                title: '운영 이벤트 대응 자동화',
+                body: '이벤트 발생 이후 승인과 실행을 연결하고, 반복 대응을 표준 워크플로우로 운영합니다.',
               ),
               CorporateInfoCard(
-                title: '제품 홍보형',
-                body: '제품 라인업과 핵심 기능을 빠르게 보여주는 제품 중심 페이지에 적합합니다.',
+                title: '지식 기반 운영 지원',
+                body: '매뉴얼, 정책, 장애 이력을 검색 가능한 지식 계층으로 묶어 운영 판단 속도와 응답 품질을 높입니다.',
               ),
               CorporateInfoCard(
-                title: '리드 수집형',
-                body: '홈페이지가 실제 문의와 영업 퍼널 역할을 해야 하는 구조에 적합합니다.',
+                title: '운영 코파일럿 구성',
+                body: '자동화 실행과 검색 근거 제공을 하나의 흐름으로 묶어 더 빠르고 일관된 운영 경험을 만듭니다.',
               ),
             ],
           ),
         ),
         CorporateActionBanner(
           title:
-              '회사 소개, 제품 소개, 솔루션 설명, 문의 전환까지 한 구조로 정리된 웹 홈페이지를 바로 시작할 수 있습니다.',
-          description: '상세 페이지 구조를 미리 분리해두면 콘텐츠 확장과 운영이 훨씬 단순해집니다.',
-          primaryLabel: '문의 페이지로 이동',
+              '운영 자동화와 지식검색을 하나의 전략으로 연결해보세요.',
+          description:
+              'AISOpsFlow와 Ainsoft RAG를 조합하면 운영팀의 실행 속도와 판단 품질을 동시에 높일 수 있습니다.',
+          primaryLabel: '문의하기',
           primaryRoute: RouteManager.contactRoute,
-          secondaryLabel: 'Products 보기',
-          secondaryRoute: RouteManager.productsRoute,
+          secondaryLabel: 'Solutions 보기',
+          secondaryRoute: RouteManager.solutionsRoute,
         ),
       ],
     );
@@ -177,7 +183,7 @@ class _HomeHeroCopy extends StatelessWidget {
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
-            'Corporate Website Experience',
+            'AINSOFT PRODUCT SUITE',
             style: GoogleFonts.dmSans(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -187,7 +193,7 @@ class _HomeHeroCopy extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          '제품 소개와 문의 전환이 동시에 되는 회사 홈페이지.',
+          '운영 자동화와 지식검색을 하나의 흐름으로 연결합니다.',
           style: GoogleFonts.spaceGrotesk(
             fontSize: responsive.heroTitleSize,
             height: 1.02,
@@ -201,7 +207,7 @@ class _HomeHeroCopy extends StatelessWidget {
             maxWidth: responsive.isBrowser ? 620 : double.infinity,
           ),
           child: Text(
-            '회사 소개, 제품 개요, 솔루션 가치, 문의 CTA를 각 모듈로 분리해 방문자가 빠르게 이해하고 필요한 페이지로 바로 이동할 수 있게 구성합니다.',
+            'AISOpsFlow는 운영 이벤트를 실행 가능한 워크플로우로 바꾸고, Ainsoft RAG는 문서와 정책을 검색 가능한 지식 레이어로 만듭니다. 더 빠른 대응, 더 정확한 판단, 더 안전한 실행을 위해 설계된 AINSOFT의 제품 조합입니다.',
             style: GoogleFonts.dmSans(
               fontSize: responsive.isMobile ? 16 : 18,
               height: 1.7,
@@ -233,17 +239,17 @@ class _HeroButtonColumn extends StatelessWidget {
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
           ),
-          child: const Text('제품 보기'),
+          child: const Text('Products 보기'),
         ),
         const SizedBox(height: 12),
         OutlinedButton(
-          onPressed: RouteManager.toContact,
+          onPressed: RouteManager.toSolutions,
           style: OutlinedButton.styleFrom(
             foregroundColor: const Color(0xFFF7F2EA),
             side: const BorderSide(color: Color(0xFFBBD0C6)),
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
           ),
-          child: const Text('상담 문의'),
+          child: const Text('Solutions 보기'),
         ),
       ],
     );
@@ -266,16 +272,16 @@ class _HeroButtonWrap extends StatelessWidget {
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
           ),
-          child: const Text('제품 보기'),
+          child: const Text('Products 보기'),
         ),
         OutlinedButton(
-          onPressed: RouteManager.toContact,
+          onPressed: RouteManager.toSolutions,
           style: OutlinedButton.styleFrom(
             foregroundColor: const Color(0xFFF7F2EA),
             side: const BorderSide(color: Color(0xFFBBD0C6)),
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
           ),
-          child: const Text('상담 문의'),
+          child: const Text('Solutions 보기'),
         ),
       ],
     );
@@ -292,10 +298,10 @@ class _HomeHeroPanels extends StatelessWidget {
     return Column(
       children: [
         const CorporateInfoCard(
-          title: '핵심 구성',
+          title: 'Built for Real Operations',
           body:
-              '회사 소개와 제품 설명을 분리된 정보 구조로 구성하고, 모든 핵심 페이지에서 문의 CTA를 일관되게 노출합니다.',
-          accentLabel: 'Structure',
+              'AISOpsFlow는 실행을 자동화하고, Ainsoft RAG는 필요한 근거를 즉시 찾게 합니다. 두 제품은 운영 현장에서 바로 쓰일 수 있도록 설계되었습니다.',
+          accentLabel: 'AINSOFT',
         ),
         SizedBox(height: responsive.gap),
         const _HomeStatPanel(),
@@ -321,18 +327,18 @@ class _HomeStatPanel extends StatelessWidget {
       child: const CorporateResponsiveWrap(
         children: [
           CorporateMetricCard(
-            value: '4',
-            label: 'Independent pages',
+            value: '2',
+            label: 'Core Products',
             dark: true,
           ),
           CorporateMetricCard(
-            value: '1',
-            label: 'Shared nav system',
+            value: 'Ops + RAG',
+            label: 'Integrated Experience',
             dark: true,
           ),
           CorporateMetricCard(
-            value: '1',
-            label: 'Primary CTA flow',
+            value: 'Core ↔ Runner / RAG Engine',
+            label: 'Key Architectures',
             dark: true,
           ),
         ],
@@ -349,20 +355,50 @@ class _HomeTrustStrip extends StatelessWidget {
     final responsive = CorporateResponsive.of(context);
 
     return Padding(
-      padding: responsive.sectionPadding.copyWith(top: 0),
+      padding: EdgeInsets.fromLTRB(
+        responsive.sectionPadding.left,
+        responsive.isMobile ? 14 : 20,
+        responsive.sectionPadding.right,
+        responsive.isMobile ? 14 : 20,
+      ),
       child: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: responsive.maxContentWidth),
-          child: Wrap(
-            spacing: responsive.gap,
-            runSpacing: responsive.gap,
-            children: const [
-              _HomeTrustChip(label: '기업형 구조'),
-              _HomeTrustChip(label: '반응형 웹'),
-              _HomeTrustChip(label: '제품 중심'),
-              _HomeTrustChip(label: '문의 전환 설계'),
-              _HomeTrustChip(label: 'Flutter Web'),
-            ],
+          constraints: BoxConstraints(
+            maxWidth: responsive.isBrowser ? 980 : responsive.maxContentWidth,
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: responsive.isMobile ? 14 : 20,
+              vertical: responsive.isMobile ? 14 : 18,
+            ),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF7F2EA),
+              borderRadius: BorderRadius.circular(
+                responsive.isMobile ? 24 : 32,
+              ),
+              border: Border.all(
+                color: const Color(0xFF0F2A2B).withValues(alpha: 0.08),
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x180F2A2B),
+                  blurRadius: 28,
+                  offset: Offset(0, 16),
+                ),
+              ],
+            ),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: responsive.gap,
+              runSpacing: responsive.gap,
+              children: const [
+                _HomeTrustChip(label: 'AISOpsFlow'),
+                _HomeTrustChip(label: 'Ainsoft RAG'),
+                _HomeTrustChip(label: 'Ops Automation'),
+                _HomeTrustChip(label: 'Embedded RAG'),
+                _HomeTrustChip(label: 'Hybrid Secure Runtime'),
+              ],
+            ),
           ),
         ),
       ),
@@ -385,8 +421,11 @@ class _HomeTrustChip extends StatelessWidget {
         vertical: responsive.isMobile ? 10 : 12,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: const Color(0xFF0F2A2B).withValues(alpha: 0.06),
+        ),
       ),
       child: Text(
         label,

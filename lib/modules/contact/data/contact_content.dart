@@ -5,43 +5,49 @@ class ContactContent {
 
   static const List<CorporateInfoCardData> contactCards = [
     CorporateInfoCardData(
-      title: '대표 메일',
-      body: 'contact@ainsoft.example 형태로 문의 채널을 가장 먼저 노출합니다.',
-      accentLabel: 'Email',
+      title: '도입 상담',
+      body:
+          'AISOpsFlow, Ainsoft RAG, 또는 두 제품의 조합이 현재 운영 환경에 어떻게 맞을지 함께 검토합니다. 도입 목적과 우선순위만 있어도 상담을 시작할 수 있습니다.',
+      accentLabel: 'Consulting',
     ),
     CorporateInfoCardData(
-      title: '상담 프로세스',
-      body: '문의 접수 후 요구사항 확인, 솔루션 제안, 일정 협의의 흐름을 짧게 안내합니다.',
-      accentLabel: 'Process',
+      title: 'PoC / Demo',
+      body:
+          '제품 구조와 적용 시나리오를 직접 확인할 수 있도록 데모와 PoC 방향을 함께 제안합니다. 운영 자동화와 지식검색의 연결 방식을 실제 흐름 기준으로 설명합니다.',
+      accentLabel: 'Proof of Value',
     ),
     CorporateInfoCardData(
-      title: '응답 기준',
-      body: '영업일 기준 응답 시간이나 상담 가능 시간대를 함께 적어 기대치를 맞춥니다.',
-      accentLabel: 'Response',
+      title: 'Partnership',
+      body:
+          '플러그인 확장, 시스템 통합, 온프레미스 배치처럼 협업이 필요한 주제도 함께 논의할 수 있습니다. 제품 소개를 넘어 실제 적용 구조까지 연결합니다.',
+      accentLabel: 'Collaboration',
     ),
   ];
 
   static const List<CorporateInfoCardData> channelCards = [
     CorporateInfoCardData(
-      title: '전화 상담',
-      body: '긴급한 제품 문의나 도입 일정 협의가 필요한 경우 빠른 연결 포인트를 제공합니다.',
+      title: '운영 자동화가 필요한 경우',
+      body:
+          '알림 이후 승인, 실행, 보고 흐름을 어떻게 표준화할지, 보안 경계를 어떻게 유지할지, 어떤 채널과 도구를 연결할지 중심으로 상담합니다.',
       dark: true,
     ),
     CorporateInfoCardData(
-      title: '이메일 문의',
-      body: '요구사항 정리나 제안 요청처럼 문서 기반 커뮤니케이션이 필요한 경우 적합합니다.',
+      title: '지식검색이 필요한 경우',
+      body:
+          '운영 매뉴얼, 정책 문서, 장애 이력을 어떤 구조로 검색 가능하게 만들지, 기존 서비스 안에 어떻게 통합할지 중심으로 상담합니다.',
       dark: true,
     ),
     CorporateInfoCardData(
-      title: '데모 요청',
-      body: '제품 소개, 적용 시나리오, 예상 일정까지 한 번에 논의할 수 있는 진입점입니다.',
+      title: '통합 시나리오가 필요한 경우',
+      body:
+          'AISOpsFlow와 Ainsoft RAG를 함께 사용해 운영 코파일럿, 서비스데스크 자동화, 온프레미스 운영 시나리오를 어떻게 설계할지 논의합니다.',
       dark: true,
     ),
   ];
 
   static const List<CorporateMetricData> checklistMetrics = [
-    CorporateMetricData(value: '1', label: '산업군'),
-    CorporateMetricData(value: '2', label: '필요 기능'),
-    CorporateMetricData(value: '3', label: '예상 일정'),
+    CorporateMetricData(value: 'Use Case', label: '적용하려는 업무 흐름'),
+    CorporateMetricData(value: 'Environment', label: '현재 운영 환경'),
+    CorporateMetricData(value: 'Timeline', label: '희망 일정'),
   ];
 }

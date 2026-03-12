@@ -10,6 +10,9 @@ class SolutionsPage extends StatelessWidget {
       children: [
         SolutionsOverviewSection(),
         SolutionsApproachSection(),
+        SolutionsAisopsflowSection(),
+        SolutionsRagSection(),
+        SolutionsCombinedSection(),
         SolutionsDeliverySection(),
         SolutionsActionSection(),
       ],

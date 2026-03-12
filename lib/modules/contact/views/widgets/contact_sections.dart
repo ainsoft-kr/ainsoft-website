@@ -13,8 +13,9 @@ class ContactOverviewSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Contact',
-      title: '문의 페이지는 길지 않아야 하고, 바로 행동할 수 있어야 합니다.',
-      description: '대표 연락처, 상담 요청 방식, 기대 응답 흐름을 짧고 분명하게 보여주면 전환 손실을 줄일 수 있습니다.',
+      title: '도입 상담, PoC, 협업 제안을 바로 시작할 수 있습니다.',
+      description:
+          '운영 자동화, 지식검색, 또는 두 제품의 조합이 필요한 경우 현재 상황과 목표를 기준으로 가장 적합한 방향을 함께 정리합니다.',
       child: _InfoCards(cards: controller.contactCards),
     );
   }
@@ -29,8 +30,9 @@ class ContactChannelsSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Channels',
-      title: '연락 수단은 많기보다 명확한 것이 중요합니다.',
-      description: '의사결정권자가 바로 행동할 수 있도록 핵심 채널과 필요한 준비 정보를 함께 배치합니다.',
+      title: '이런 주제로 상담을 많이 시작합니다.',
+      description:
+          '운영 자동화, 지식검색, 통합 시나리오 중 어디에서부터 시작할지 정하면 더 빠르게 필요한 제품과 구조를 제안할 수 있습니다.',
       dark: true,
       actionLabel: 'About 보기',
       actionRoute: RouteManager.aboutRoute,
@@ -48,8 +50,9 @@ class ContactChecklistSection extends StatelessWidget {
 
     return CorporatePageSection(
       label: 'Checklist',
-      title: '문의 전에 준비하면 좋은 정보 예시입니다.',
-      description: '산업군, 필요한 기능, 예상 일정 정도만 받아도 상담 품질이 크게 올라갑니다.',
+      title: '이 세 가지만 정리되면 상담이 더 빨라집니다.',
+      description:
+          '적용하려는 업무 흐름, 현재 운영 환경, 희망 일정을 알려주시면 제품 구성과 도입 방향을 더 구체적으로 제안할 수 있습니다.',
       child: _MetricCards(metrics: controller.checklistMetrics),
     );
   }
@@ -61,8 +64,9 @@ class ContactActionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CorporateActionBanner(
-      title: '문의 페이지의 목적은 설명이 아니라 상담 시작입니다.',
-      description: '현재 구조에서는 모든 상위 페이지가 이 문의 페이지로 자연스럽게 연결되도록 정리되어 있습니다.',
+      title: 'AINSOFT와 함께 운영 자동화와 지식검색 전략을 설계해보세요.',
+      description:
+          '제품 소개부터 PoC 방향, 통합 시나리오까지 현재 환경에 맞는 현실적인 도입 방안을 함께 제안합니다.',
       primaryLabel: '홈으로 이동',
       primaryRoute: RouteManager.initialRoute,
       secondaryLabel: 'Products 보기',
