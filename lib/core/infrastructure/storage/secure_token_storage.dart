@@ -1,17 +1,16 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'contracts/token_storage.dart';
 
 /// **SecureTokenStorage**
 ///
-/// Singleton implementation of [TokenStorage] backed by platform secure
-/// storage (Keychain on iOS, Android Keystore on Android).
+/// Singleton implementation of [TokenStorage] backed by local app storage.
 ///
 /// **Why**
-/// - Keep authentication tokens out of plaintext preferences.
+/// - Keep token access behind a dedicated interface.
 /// - Provide synchronous reads via in-memory caches after initialization.
 ///
 /// **Key Features**
-/// - `initialize()` hydrates in-memory caches from secure storage.
+/// - `initialize()` hydrates in-memory caches from local storage.
 /// - Synchronous getters for common hot paths (HTTP header building).
 /// - Writes delete keys when a null/empty value is provided.
 ///
@@ -24,28 +23,30 @@ import 'contracts/token_storage.dart';
 ///
 // ────────────────────────────────────────────────
 class SecureTokenStorage implements TokenStorage {
-  SecureTokenStorage._internal([FlutterSecureStorage? secure])
-      : _secure = secure ?? const FlutterSecureStorage();
+  SecureTokenStorage._internal();
 
   static final SecureTokenStorage _instance = SecureTokenStorage._internal();
   static SecureTokenStorage get instance => _instance;
 
-  final FlutterSecureStorage _secure;
-
   static const String _kAccess = 'accessToken';
   static const String _kRefresh = 'refreshToken';
+  static const String _container = 'appName-app';
+
+  late GetStorage _box;
 
   String? _accessCache;
   String? _refreshCache;
 
   /// **initialize**
   ///
-  /// Hydrate in-memory caches from secure storage.
+  /// Hydrate in-memory caches from local storage.
   // ────────────────────────────────────────────────
   @override
   Future<void> initialize() async {
-    _accessCache = await _secure.read(key: _kAccess);
-    _refreshCache = await _secure.read(key: _kRefresh);
+    await GetStorage.init(_container);
+    _box = GetStorage(_container);
+    _accessCache = _box.read<String>(_kAccess);
+    _refreshCache = _box.read<String>(_kRefresh);
   }
 
   /// **readAccessTokenSync**
@@ -64,9 +65,9 @@ class SecureTokenStorage implements TokenStorage {
   Future<void> writeAccessToken(String? value) async {
     _accessCache = value;
     if (value == null || value.isEmpty) {
-      await _secure.delete(key: _kAccess);
+      await _box.remove(_kAccess);
     } else {
-      await _secure.write(key: _kAccess, value: value);
+      await _box.write(_kAccess, value);
     }
   }
 
@@ -76,9 +77,9 @@ class SecureTokenStorage implements TokenStorage {
   Future<void> writeRefreshToken(String? value) async {
     _refreshCache = value;
     if (value == null || value.isEmpty) {
-      await _secure.delete(key: _kRefresh);
+      await _box.remove(_kRefresh);
     } else {
-      await _secure.write(key: _kRefresh, value: value);
+      await _box.write(_kRefresh, value);
     }
   }
 
@@ -88,7 +89,7 @@ class SecureTokenStorage implements TokenStorage {
   Future<void> clearTokens() async {
     _accessCache = null;
     _refreshCache = null;
-    await _secure.delete(key: _kAccess);
-    await _secure.delete(key: _kRefresh);
+    await _box.remove(_kAccess);
+    await _box.remove(_kRefresh);
   }
 }

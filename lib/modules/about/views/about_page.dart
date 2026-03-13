@@ -9,6 +9,7 @@ class AboutPage extends StatelessWidget {
     return const Column(
       children: [
         AboutOverviewSection(),
+        AboutFounderSection(),
         AboutStrengthSection(),
         AboutSnapshotSection(),
         AboutActionSection(),

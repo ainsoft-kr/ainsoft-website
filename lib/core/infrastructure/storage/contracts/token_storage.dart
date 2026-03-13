@@ -3,7 +3,7 @@
 /// Contract for securely storing and retrieving authentication tokens.
 ///
 /// **Why**
-/// - Abstract over platform-specific secure storage to enable testing and swaps.
+/// - Abstract over token persistence details to enable testing and swaps.
 /// - Provide a minimal, intention-revealing API for access/refresh tokens.
 ///
 /// **Key Features**

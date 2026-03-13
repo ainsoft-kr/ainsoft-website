@@ -13,6 +13,9 @@ class AssetsManager {
   /// Path for the application icon.
   static const String appIconPath = 'assets/icons/opaala.svg';
 
+  /// Portrait image used on the about page founder section.
+  static const String founderPortraitPath = 'assets/icons/founder_portrait.png';
+
   // **Icons**
   /// Path for the home/requests icon.
   static const String homeIconPath = 'assets/icons/requests.svg';

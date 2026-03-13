@@ -3,6 +3,51 @@ import '/modules/home/models/corporate_content_models.dart';
 class AboutContent {
   AboutContent._();
 
+  static const String founderName = '박영규';
+
+  static const String founderRole = '대표 / Senior Software Engineer';
+
+  static const String founderLocation = '전라남도 나주시, 대한민국';
+
+  static const String founderEducation =
+      '퀸즐랜드 대학교 경제학 석사 · 안동대학교 행정학/정보통신공학 복수전공';
+
+  static const List<String> founderIntroParagraphs = [
+    '깔끔한 아키텍처와 실용적인 도구, 그리고 고객·동료와의 긴밀한 협업으로 실제 문제를 해결하는 것을 즐기는 시니어 소프트웨어 엔지니어입니다.',
+    'JVM·Python 백엔드, 클라우드·DevOps, 데이터 집약 시스템, 로우코드·노코드 플랫폼까지 폭넓게 다뤄왔고 공공기관과 기업 환경에서 프로덕션 시스템을 꾸준히 구축해 왔습니다.',
+    '지금은 AINSOFT에서 운영 자동화와 지식검색 제품을 직접 설계하고 구현하면서, 도입 가능성까지 고려한 현실적인 제품 경험을 만드는 데 집중하고 있습니다.',
+  ];
+
+  static const List<String> founderFocusTags = [
+    'Google',
+    '공공기관·엔터프라이즈',
+    'JVM / Python',
+    'AWS / Terraform',
+    'Low-code / No-code',
+    'Product Engineering',
+  ];
+
+  static const List<CorporateInfoCardData> founderHighlightCards = [
+    CorporateInfoCardData(
+      title: 'Product Builder',
+      body:
+          'Ainsoft와 FavoriteMedium에서 제품 설계부터 구현까지 직접 이끌며 운영 자동화, 지식검색, 시뮬레이션, 예약·시설 관리 서비스를 현실적인 도입 구조로 풀어냈습니다.',
+      accentLabel: 'Recent Focus',
+    ),
+    CorporateInfoCardData(
+      title: 'Enterprise Proven',
+      body:
+          'Google Android VTS, KEPCO 마이크로서비스, KOCCA 평가 플랫폼, 현대오토에버 ERP 연동 등 복잡한 엔터프라이즈·공공 시스템을 실제 운영 환경에 맞춰 구축했습니다.',
+      accentLabel: 'Execution Context',
+    ),
+    CorporateInfoCardData(
+      title: 'Wide Delivery Range',
+      body:
+          'Spring, Kotlin, Scala, Python, Angular, Appsmith, Terraform, GitHub Actions까지 아우르며 제품 개발과 운영 기반, 자동화 파이프라인을 함께 설계합니다.',
+      accentLabel: 'Technical Range',
+    ),
+  ];
+
   static const List<CorporateInfoCardData> overviewCards = [
     CorporateInfoCardData(
       title: 'Mission',
@@ -39,8 +84,7 @@ class AboutContent {
     ),
     CorporateInfoCardData(
       title: 'Pragmatic Delivery',
-      body:
-          '현장의 운영 문제를 빠르게 정리하고, 도입 가능한 범위부터 시작해 실제 효과가 나는 흐름으로 연결합니다.',
+      body: '현장의 운영 문제를 빠르게 정리하고, 도입 가능한 범위부터 시작해 실제 효과가 나는 흐름으로 연결합니다.',
       dark: true,
     ),
   ];

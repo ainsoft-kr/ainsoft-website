@@ -24,15 +24,18 @@ class HomePage extends StatelessWidget {
             children: [
               CorporateInfoCard(
                 title: '운영 자동화 축',
-                body: 'AISOpsFlow는 alerts, approval, actions, reporting을 하나의 흐름으로 연결해 반복적인 운영 절차를 표준화합니다.',
+                body:
+                    'AISOpsFlow는 alerts, approval, actions, reporting을 하나의 흐름으로 연결해 반복적인 운영 절차를 표준화합니다.',
               ),
               CorporateInfoCard(
                 title: '지식검색 축',
-                body: 'Ainsoft RAG는 서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진으로 운영 문서와 정책을 빠르게 찾게 합니다.',
+                body:
+                    'Ainsoft RAG는 서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진으로 운영 문서와 정책을 빠르게 찾게 합니다.',
               ),
               CorporateInfoCard(
                 title: '통합 운영 경험',
-                body: '실행은 AISOpsFlow가 맡고, 검색과 근거 제공은 Ainsoft RAG가 맡아 운영팀이 하나의 흐름 안에서 대응할 수 있습니다.',
+                body:
+                    '실행은 AISOpsFlow가 맡고, 검색과 근거 제공은 Ainsoft RAG가 맡아 운영팀이 하나의 흐름 안에서 대응할 수 있습니다.',
               ),
             ],
           ),
@@ -55,13 +58,15 @@ class HomePage extends StatelessWidget {
               ),
               CorporateInfoCard(
                 title: 'Ainsoft RAG',
-                body: '서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진과 starter 제품군입니다.',
+                body:
+                    '서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진과 starter 제품군입니다.',
                 accentLabel: 'Knowledge Retrieval',
                 dark: true,
               ),
               CorporateInfoCard(
                 title: 'Together',
-                body: '하나는 실행 자동화를, 다른 하나는 지식검색을 담당해 단독으로도 명확하고 함께 쓸 때 더 강한 운영 경험을 제공합니다.',
+                body:
+                    '하나는 실행 자동화를, 다른 하나는 지식검색을 담당해 단독으로도 명확하고 함께 쓸 때 더 강한 운영 경험을 제공합니다.',
                 accentLabel: 'Combined Value',
                 dark: true,
               ),
@@ -83,7 +88,8 @@ class HomePage extends StatelessWidget {
               ),
               CorporateInfoCard(
                 title: '지식 기반 운영 지원',
-                body: '매뉴얼, 정책, 장애 이력을 검색 가능한 지식 계층으로 묶어 운영 판단 속도와 응답 품질을 높입니다.',
+                body:
+                    '매뉴얼, 정책, 장애 이력을 검색 가능한 지식 계층으로 묶어 운영 판단 속도와 응답 품질을 높입니다.',
               ),
               CorporateInfoCard(
                 title: '운영 코파일럿 구성',
@@ -93,8 +99,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         CorporateActionBanner(
-          title:
-              '운영 자동화와 지식검색을 하나의 전략으로 연결해보세요.',
+          title: '운영 자동화와 지식검색을 하나의 전략으로 연결해보세요.',
           description:
               'AISOpsFlow와 Ainsoft RAG를 조합하면 운영팀의 실행 속도와 판단 품질을 동시에 높일 수 있습니다.',
           primaryLabel: '문의하기',
@@ -327,18 +332,18 @@ class _HomeStatPanel extends StatelessWidget {
       child: const CorporateResponsiveWrap(
         children: [
           CorporateMetricCard(
-            value: '2',
-            label: 'Core Products',
+            value: 'From Alert',
+            label: '알림 다음은 왜 실행일까',
             dark: true,
           ),
           CorporateMetricCard(
-            value: 'Ops + RAG',
-            label: 'Integrated Experience',
+            value: 'RAG Inside',
+            label: '검색은 왜 밖이 아니라 안에 있을까',
             dark: true,
           ),
           CorporateMetricCard(
-            value: 'Core ↔ Runner / RAG Engine',
-            label: 'Key Architectures',
+            value: 'Split Runtime',
+            label: '실행 구조를 왜 둘로 나눴을까',
             dark: true,
           ),
         ],

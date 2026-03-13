@@ -19,7 +19,6 @@ import '/core/infrastructure/http/api_service.dart';
 /// **IMPORTANT**: Set to `false` in production builds.
 const bool _useMockAuth = true;
 
-
 /// The `AuthService` class is responsible for handling all authentication-related
 /// operations, such as signing in, signing out, and managing access and refresh tokens.
 /// It interacts with the API to authenticate users and saves the tokens in memory for
@@ -38,7 +37,7 @@ const bool _useMockAuth = true;
 ///
 /// Key Features
 /// - Validates sign-in response shape before saving tokens.
-/// - Stores tokens via [AppStorageService] (secure storage facade).
+/// - Stores tokens via [AppStorageService] (token storage facade).
 /// - Provides access/refresh expiry checks using `jwt_decoder`.
 ///
 /// Example
@@ -83,12 +82,18 @@ class AuthService extends ApiService {
     );
 
     final respBody = response.body;
-    if (respBody is! Map || respBody['access'] is! String || respBody['refresh'] is! String) {
+    if (respBody is! Map ||
+        respBody['access'] is! String ||
+        respBody['refresh'] is! String) {
       throw APIException('Malformed sign-in response');
     }
 
-    await AppStorageService.instance.setAccessToken(respBody['access'] as String);
-    await AppStorageService.instance.setRefreshToken(respBody['refresh'] as String);
+    await AppStorageService.instance.setAccessToken(
+      respBody['access'] as String,
+    );
+    await AppStorageService.instance.setRefreshToken(
+      respBody['refresh'] as String,
+    );
     return true;
   }
 
@@ -202,7 +207,7 @@ class AuthService extends ApiService {
   // Handles user sign-out by clearing tokens and selected venue/zone from MemoryService.
   /// **signOut**
   ///
-  /// Clear tokens from secure storage to terminate the session.
+  /// Clear tokens from token storage to terminate the session.
   ///
   /// Returns
   /// - `bool`: `true` when tokens are cleared.
@@ -212,14 +217,15 @@ class AuthService extends ApiService {
   ///
   // ────────────────────────────────────────────────
   Future<bool> signOut() async {
-    await AppStorageService.instance.clearTokens(); // Clear tokens securely via facade
+    await AppStorageService.instance
+        .clearTokens(); // Clear tokens securely via facade
     return true;
   }
 
   // Checks if the user is logged in by verifying if an access token is present in MemoryService.
   /// **isLoggedIn**
   ///
-  /// Indicate whether an access token exists in secure storage cache.
+  /// Indicate whether an access token exists in token storage cache.
   ///
   /// Returns
   /// - `bool`: `true` if an access token is present; otherwise `false`.
@@ -251,7 +257,9 @@ class AuthService extends ApiService {
     if (token == null) {
       throw AuthException('No Session'); // Throw exception if no token found
     }
-    return JwtDecoder.isExpired(token); // Use JwtDecoder to check token expiration
+    return JwtDecoder.isExpired(
+      token,
+    ); // Use JwtDecoder to check token expiration
   }
 
   // Checks if the refresh token is expired in a similar way to the access token.
@@ -270,8 +278,12 @@ class AuthService extends ApiService {
   Future<bool> isRefreshTokenExpired() async {
     String? token = SecureTokenStorage.instance.readRefreshTokenSync;
     if (token == null) {
-      throw AppException('No Session'); // Throw exception if no refresh token found
+      throw AppException(
+        'No Session',
+      ); // Throw exception if no refresh token found
     }
-    return JwtDecoder.isExpired(token); // Use JwtDecoder to check token expiration
+    return JwtDecoder.isExpired(
+      token,
+    ); // Use JwtDecoder to check token expiration
   }
 }
