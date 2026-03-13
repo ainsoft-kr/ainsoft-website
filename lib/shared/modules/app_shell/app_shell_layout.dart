@@ -461,17 +461,17 @@ class _FooterContactBlock extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'contact@ainsoft.example',
+          'ygpark2@kakao.com',
           style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
         ),
         const SizedBox(height: 8),
         Text(
-          '+82 2-0000-0000',
+          '+82 10-2146-0818',
           style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
         ),
         const SizedBox(height: 8),
         Text(
-          'Seoul, Republic of Korea',
+          '154, Green-ro, Naju-si, Jeollanam-do, Republic of Korea',
           style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
         ),
       ],
