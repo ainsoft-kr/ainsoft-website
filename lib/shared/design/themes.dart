@@ -22,7 +22,9 @@ final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
   ),
   scaffoldBackgroundColor: const Color(0xFFF4F0E8),
-  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.light().textTheme),
+  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.light().textTheme).apply(
+    fontFamilyFallback: ['Apple SD Gothic Neo', 'Malgun Gothic', 'sans-serif'],
+  ),
   appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
 );
 
@@ -46,7 +48,9 @@ final ThemeData darkTheme = ThemeData(
     seedColor: const Color(0xFFC66B3D),
     brightness: Brightness.dark,
   ),
-  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.dark().textTheme),
+  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.dark().textTheme).apply(
+    fontFamilyFallback: ['Apple SD Gothic Neo', 'Malgun Gothic', 'sans-serif'],
+  ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
   ),
