@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '/app.dart';
 import '/app_module.dart';
@@ -15,7 +14,6 @@ import '/core/infrastructure/http/api_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  GoogleFonts.config.allowRuntimeSources = false;
   await AppStorageService.instance.initialize();
 
   // Initialize localization with saved preference
