@@ -1,10 +1,10 @@
 [
   {
-    "slug": "first-post",
-    "title": "Markdown으로 기록하는 첫 번째 포스트",
-    "date": "2026-07-25",
+    "slug": "minimal-coding-agent-vs-aisopsflow",
+    "title": "최소주의 코딩 에이전트와 AISOpsFlow를 비교해보며",
+    "date": "2026-08-02",
     "category": "Engineering",
-    "excerpt": "assets/posts에 Markdown 파일을 추가하고 GitHub에 push하면 블로그에 자동으로 공개됩니다.",
-    "markdownPath": "assets/posts/first-post.md"
+    "excerpt": "pi-coding-agent의 최소주의와 AISOpsFlow의 운영 자동화를 비교하며, 에이전트 제품에서 컨텍스트·실행·관찰 가능성이 어떻게 달라져야 하는지 정리합니다.",
+    "markdownPath": "assets/posts/minimal-coding-agent-vs-aisopsflow.md"
   }
 ]
