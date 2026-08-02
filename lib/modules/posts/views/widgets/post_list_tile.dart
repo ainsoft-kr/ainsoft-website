@@ -1,109 +1,125 @@
 import 'package:flutter/material.dart';
-import '/modules/posts/data/models/post_model.dart';
-import '/shared/presentation/custom/custom_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-/// **PostListTile**
-///
-/// Individual list item widget displaying a single blog post.
-///
-/// **Features**:
-/// - Clean card design with elevation
-/// - User ID badge
-/// - Bold title
-/// - Truncated body text with ellipsis
-/// - Tap interaction (optional navigation)
-///
-/// **Usage**:
-/// ```dart
-/// PostListTile(post: postModel)
-/// ```
-class PostListTile extends StatelessWidget {
-  /// The post model to display.
+import '/core/routing/route_manager.dart';
+import '/modules/posts/data/models/post_model.dart';
+import '/shared/modules/app_shell/app_shell_responsive.dart';
+
+class PostListTile extends StatefulWidget {
+  const PostListTile({super.key, required this.post});
+
   final PostModel post;
 
-  const PostListTile({super.key, required this.post});
+  @override
+  State<PostListTile> createState() => _PostListTileState();
+}
+
+class _PostListTileState extends State<PostListTile> {
+  bool _hovered = false;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final responsive = AppShellResponsive.of(context);
 
-    return FloatSurfaceCard(
-      size: FSCSize.standard,
-      elevation: FSCElevation.resting,
-      onTap: () => _onPostTapped(context),
-      header: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 4,
-            ),
-            decoration: BoxDecoration(
-              color: theme.primaryColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Text(
-              'User ${post.userId}',
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.primaryColor,
-                fontWeight: FontWeight.w600,
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        transform: Matrix4.translationValues(0, _hovered ? -4 : 0, 0),
+        child: Material(
+          color: Colors.white.withValues(alpha: 0.82),
+          borderRadius: BorderRadius.circular(responsive.isMobile ? 20 : 26),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () => RouteManager.toPost(widget.post.slug),
+            child: Padding(
+              padding: EdgeInsets.all(responsive.isMobile ? 20 : 28),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 8,
+                          children: [
+                            _PostBadge(label: widget.post.category),
+                            Text(
+                              widget.post.date,
+                              style: GoogleFonts.dmSans(
+                                color: const Color(0xFF6C7771),
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 14),
+                        Text(
+                          widget.post.title,
+                          style: GoogleFonts.spaceGrotesk(
+                            color: const Color(0xFF0F2A2B),
+                            fontSize: responsive.isMobile ? 22 : 28,
+                            fontWeight: FontWeight.w700,
+                            height: 1.15,
+                          ),
+                        ),
+                        if (widget.post.excerpt.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          Text(
+                            widget.post.excerpt,
+                            style: GoogleFonts.dmSans(
+                              color: const Color(0xFF53635C),
+                              fontSize: 15,
+                              height: 1.65,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Icon(
+                    Icons.arrow_outward_rounded,
+                    color: _hovered
+                        ? const Color(0xFFC86E42)
+                        : const Color(0xFF0F2A2B),
+                  ),
+                ],
               ),
             ),
           ),
-          const Spacer(),
-          Text(
-            '#${post.id}',
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.5),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Title
-          Text(
-            post.title,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-
-          const SizedBox(height: 8),
-
-          // Body (truncated)
-          Text(
-            post.body,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.textTheme.bodySmall?.color,
-            ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+        ),
       ),
     );
   }
+}
 
-  /// Handles post tap interaction.
-  ///
-  /// Currently shows a snackbar. Replace with navigation to detail page:
-  /// ```dart
-  /// RouteManager.to('/post-detail', arguments: post);
-  /// ```
-  void _onPostTapped(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Post #${post.id}: ${post.title}'),
-        duration: const Duration(seconds: 2),
+class _PostBadge extends StatelessWidget {
+  const _PostBadge({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: const Color(0xFFE7F0E9),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Text(
+          label,
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFF28594B),
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
     );
-
-    // Optional: Navigate to detail page
-    // RouteManager.to('/post-detail', arguments: post);
   }
 }

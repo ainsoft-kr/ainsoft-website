@@ -9,6 +9,7 @@ class RouteManager {
   static const String productsRoute = '/products';
   static const String solutionsRoute = '/solutions';
   static const String servicesRoute = '/services';
+  static const String postsRoute = '/posts';
   static const String contactRoute = '/contact';
   static const String authRoute = '/auth';
   static const String registerRoute = '/auth/register';
@@ -52,6 +53,8 @@ class RouteManager {
   static Future<dynamic>? toProducts() => to(productsRoute);
   static Future<dynamic>? toSolutions() => to(solutionsRoute);
   static Future<dynamic>? toServices() => to(servicesRoute);
+  static Future<dynamic>? toPosts() => offAll(postsRoute);
+  static Future<dynamic>? toPost(String slug) => offAll('$postsRoute/$slug');
   static Future<dynamic>? toContact() => to(contactRoute);
   static Future<dynamic>? logout() => offAll(authRoute);
   static Future<dynamic>? loginSuccess() => offAll(menuRoute);

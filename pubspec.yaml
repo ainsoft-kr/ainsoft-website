@@ -26,6 +26,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   path_provider: ^2.1.5
   responsive_framework: ^1.5.1
+  flutter_smooth_markdown: ^0.8.1
 
 dev_dependencies:
   flutter_test:
@@ -37,4 +38,5 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/posts/
     - google_fonts/

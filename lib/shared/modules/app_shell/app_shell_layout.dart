@@ -99,6 +99,10 @@ class _AppShellHeader extends StatelessWidget {
         route: RouteManager.servicesRoute,
       ),
       const _AppShellNavItem(
+        label: 'Post',
+        route: RouteManager.postsRoute,
+      ),
+      const _AppShellNavItem(
         label: 'Contact',
         route: RouteManager.contactRoute,
       ),
@@ -181,7 +185,9 @@ class _AppShellHeader extends StatelessWidget {
       return currentRoute == RouteManager.initialRoute ||
           currentRoute == RouteManager.homeRoute;
     }
-    return currentRoute == route;
+    return currentRoute == route ||
+        (route == RouteManager.postsRoute &&
+            currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
   void _navigate(String route) {
@@ -383,6 +389,7 @@ class _FooterLinkBlock extends StatelessWidget {
       (label: 'Products', route: RouteManager.productsRoute),
       (label: 'Solutions', route: RouteManager.solutionsRoute),
       (label: 'Services', route: RouteManager.servicesRoute),
+      (label: 'Post', route: RouteManager.postsRoute),
       (label: 'Contact', route: RouteManager.contactRoute),
     ];
 
@@ -430,7 +437,9 @@ class _FooterLinkBlock extends StatelessWidget {
       return currentRoute == RouteManager.initialRoute ||
           currentRoute == RouteManager.homeRoute;
     }
-    return currentRoute == route;
+    return currentRoute == route ||
+        (route == RouteManager.postsRoute &&
+            currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
   void _navigate(String route) {

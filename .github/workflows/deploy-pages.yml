@@ -40,6 +40,9 @@ jobs:
           flutter --version
           flutter config --enable-web
 
+      - name: Generate post manifest
+        run: dart tool/generate_posts_manifest.dart
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -48,6 +51,9 @@ jobs:
 
       - name: Add custom domain
         run: cp web/CNAME build/web/CNAME
+
+      - name: Add SPA fallback for deep links
+        run: cp build/web/index.html build/web/404.html
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4

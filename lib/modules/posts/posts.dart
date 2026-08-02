@@ -7,6 +7,7 @@ export 'data/services/post_service.dart';
 
 // Views
 export 'views/posts_page.dart';
+export 'views/post_detail_page.dart';
 export 'views/widgets/posts_list_view.dart';
 export 'views/widgets/post_list_tile.dart';
 

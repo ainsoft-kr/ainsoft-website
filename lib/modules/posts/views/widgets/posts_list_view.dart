@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
+
 import '/modules/posts/data/models/post_model.dart';
 import '/modules/posts/views/widgets/post_list_tile.dart';
+import '/shared/modules/app_shell/app_shell_responsive.dart';
 
-/// **PostsListView**
-///
-/// Scrollable list view displaying multiple blog posts.
-///
-/// **Features**:
-/// - Separated list items with spacing
-/// - Safe area padding
-/// - Responsive to different screen sizes
-/// - Clean, modern card-based design
-///
-/// **Usage**:
-/// ```dart
-/// PostsListView(posts: postsList)
-/// ```
 class PostsListView extends StatelessWidget {
-  /// List of posts to display.
-  final List<PostModel> posts;
-
   const PostsListView({super.key, required this.posts});
+
+  final List<PostModel> posts;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: posts.length,
-      itemBuilder: (context, index) => PostListTile(post: posts[index]),
-      separatorBuilder: (context, index) => const SizedBox(height: 12),
+    final responsive = AppShellResponsive.of(context);
+
+    return Padding(
+      padding: responsive.sectionPadding,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: responsive.maxContentWidth),
+          child: Column(
+            children: [
+              for (var index = 0; index < posts.length; index++) ...[
+                PostListTile(post: posts[index]),
+                if (index != posts.length - 1) const SizedBox(height: 14),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

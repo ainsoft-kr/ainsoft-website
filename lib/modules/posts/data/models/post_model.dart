@@ -1,85 +1,58 @@
 import 'dart:convert';
 
-/// Converts a JSON List into a list of `PostModel` instances.
-///
-/// [json] is the input JSON list from the API.
-///
-/// Returns a list of `PostModel` objects.
-List<PostModel> postModelFromJson(List json) =>
-    List<PostModel>.from(json.map((x) => PostModel.fromJson(x)));
+List<PostModel> postModelFromJson(List<dynamic> json) => json
+    .map((item) => PostModel.fromJson(item as Map<String, dynamic>))
+    .toList();
 
-/// Converts a list of `PostModel` instances into a JSON-encoded string.
-///
-/// [data] is the list of `PostModel` to convert.
-///
-/// Returns the JSON-encoded string representation of the list.
 String postModelToJson(List<PostModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    json.encode(data.map((post) => post.toJson()).toList());
 
-/// **PostModel**
-///
-/// A model representing a blog post from JSONPlaceholder API.
-///
-/// This model is used as an example to demonstrate the template's
-/// API integration patterns: apiFetch() → ApiResponse → ApiHandler.
-///
-/// **Fields**:
-/// - `id`: Unique identifier for the post
-/// - `userId`: ID of the user who created the post
-/// - `title`: Post title/headline
-/// - `body`: Post content/body text
-///
-/// **Example JSON**:
-/// ```json
-/// {
-///   "userId": 1,
-///   "id": 1,
-///   "title": "sunt aut facere repellat provident",
-///   "body": "quia et suscipit\nsuscipit recusandae..."
-/// }
-/// ```
-///
-/// **API Source**: https://jsonplaceholder.typicode.com/posts
+/// Metadata and rendered source for one Markdown post.
 class PostModel {
-  /// Unique identifier for the post.
-  final int id;
-
-  /// ID of the user who created this post.
-  final int userId;
-
-  /// Title of the post.
-  final String title;
-
-  /// Body/content of the post.
-  final String body;
-
-  /// Constructor to initialize all required fields.
-  PostModel({
-    required this.id,
-    required this.userId,
+  const PostModel({
+    required this.slug,
     required this.title,
-    required this.body,
+    required this.date,
+    required this.category,
+    required this.excerpt,
+    required this.markdownPath,
+    this.markdown = '',
   });
 
-  /// Factory method to create a `PostModel` from a JSON map.
-  ///
-  /// [json] is the JSON map containing the post details from the API.
-  ///
-  /// Returns a `PostModel` instance.
+  final String slug;
+  final String title;
+  final String date;
+  final String category;
+  final String excerpt;
+  final String markdownPath;
+  final String markdown;
+
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
-        id: json["id"],
-        userId: json["userId"],
-        title: json["title"],
-        body: json["body"],
+        slug: json['slug']?.toString() ?? '',
+        title: json['title']?.toString() ?? 'Untitled post',
+        date: json['date']?.toString() ?? '',
+        category: json['category']?.toString() ?? 'Notes',
+        excerpt: json['excerpt']?.toString() ?? '',
+        markdownPath: json['markdownPath']?.toString() ?? '',
+        markdown: json['markdown']?.toString() ?? '',
       );
 
-  /// Converts the `PostModel` instance into a JSON map.
-  ///
-  /// Returns a map representing the `PostModel` instance.
+  PostModel copyWith({String? markdown}) => PostModel(
+        slug: slug,
+        title: title,
+        date: date,
+        category: category,
+        excerpt: excerpt,
+        markdownPath: markdownPath,
+        markdown: markdown ?? this.markdown,
+      );
+
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "userId": userId,
-        "title": title,
-        "body": body,
+        'slug': slug,
+        'title': title,
+        'date': date,
+        'category': category,
+        'excerpt': excerpt,
+        'markdownPath': markdownPath,
       };
 }

@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "first-post",
+    "title": "Markdown으로 기록하는 첫 번째 포스트",
+    "date": "2026-07-25",
+    "category": "Engineering",
+    "excerpt": "assets/posts에 Markdown 파일을 추가하고 GitHub에 push하면 블로그에 자동으로 공개됩니다.",
+    "markdownPath": "assets/posts/first-post.md"
+  }
+]

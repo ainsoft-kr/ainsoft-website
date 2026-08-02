@@ -32,6 +32,7 @@ Think of it as **architecture-as-a-library** rather than architecture-as-a-frame
 - [💭 Philosophy](#-philosophy)
 - [📏 Conventions & Guidelines](#-conventions--guidelines)
 - [🚀 Quick Start](#-quick-start)
+- [📝 Markdown Posts](#-markdown-posts)
 - [🏗️ Architecture](#️-architecture)
 - [📁 Template Structure](#-template-structure)
 - [🧩 Modules](#-modules)
@@ -45,6 +46,30 @@ Think of it as **architecture-as-a-library** rather than architecture-as-a-frame
 - [👤 Author & Acknowledgments](#-author--acknowledgments)
 - [📄 License](#-license)
 - [🔗 Resources](#-resources)
+
+---
+
+## 📝 Markdown Posts
+
+Blog posts live in `assets/posts/` and are rendered with
+[`flutter_smooth_markdown`](https://pub.dev/packages/flutter_smooth_markdown).
+Add a `.md` file with front matter, then push it to `main`:
+
+```markdown
+---
+title: My post
+date: 2026-07-25
+category: Engineering
+excerpt: A short summary shown in the post list.
+---
+
+# My post
+
+Markdown content goes here.
+```
+
+The GitHub Actions workflow runs `tool/generate_posts_manifest.dart`, builds
+the Flutter web app, and deploys the result to GitHub Pages automatically.
 
 ---
 
