@@ -470,7 +470,7 @@ class _FooterContactBlock extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'ygpark2@kakao.com',
+          'admin@ain.ai.kr',
           style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
         ),
         const SizedBox(height: 8),
