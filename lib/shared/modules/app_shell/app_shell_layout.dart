@@ -371,6 +371,14 @@ class _FooterBrandBlock extends StatelessWidget {
             color: const Color(0xFFD7E2DC),
           ),
         ),
+        const SizedBox(height: 14),
+        Text(
+          '사업자등록번호 206-29-47109',
+          style: GoogleFonts.dmSans(
+            fontSize: 13,
+            color: const Color(0xFFD7E2DC),
+          ),
+        ),
       ],
     );
   }
@@ -481,11 +489,6 @@ class _FooterContactBlock extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           '154, Green-ro, Naju-si, Jeollanam-do, Republic of Korea',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          '사업자등록번호 206-29-47109',
           style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
         ),
       ],
