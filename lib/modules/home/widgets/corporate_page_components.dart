@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 import 'corporate_responsive.dart';
 
 class CorporatePageSection extends StatelessWidget {
@@ -55,7 +56,7 @@ class CorporatePageSection extends StatelessWidget {
                     letterSpacing: 1.4,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFFC86E42),
-                  ),
+                  ).copyWith(fontFamilyFallback: appFontFallback),
                 ),
                 SizedBox(height: responsive.isMobile ? 10 : 12),
                 Text(
@@ -67,7 +68,7 @@ class CorporatePageSection extends StatelessWidget {
                     color: dark
                         ? const Color(0xFFF7F2EA)
                         : const Color(0xFF0F2A2B),
-                  ),
+                  ).copyWith(fontFamilyFallback: appFontFallback),
                 ),
                 SizedBox(height: responsive.isMobile ? 10 : 12),
                 ConstrainedBox(
@@ -82,7 +83,7 @@ class CorporatePageSection extends StatelessWidget {
                       color: dark
                           ? const Color(0xFFD7E2DC)
                           : const Color(0xFF4C6767),
-                    ),
+                    ).copyWith(fontFamilyFallback: appFontFallback),
                   ),
                 ),
                 SizedBox(height: responsive.isMobile ? 20 : 24),
@@ -198,7 +199,7 @@ class CorporateInfoCard extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
                 color: const Color(0xFFC86E42),
-              ),
+              ).copyWith(fontFamilyFallback: appFontFallback),
             ),
             const SizedBox(height: 10),
           ],
@@ -208,7 +209,7 @@ class CorporateInfoCard extends StatelessWidget {
               fontSize: responsive.cardTitleSize,
               fontWeight: FontWeight.w700,
               color: dark ? const Color(0xFFF7F2EA) : const Color(0xFF0F2A2B),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
           const SizedBox(height: 10),
           Text(
@@ -217,7 +218,7 @@ class CorporateInfoCard extends StatelessWidget {
               fontSize: responsive.isMobile ? 14 : 15,
               height: 1.7,
               color: dark ? const Color(0xFFD7E2DC) : const Color(0xFF536D6D),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ],
       ),
@@ -260,7 +261,7 @@ class CorporateMetricCard extends StatelessWidget {
               fontSize: responsive.isMobile ? 24 : 28,
               fontWeight: FontWeight.w700,
               color: dark ? Colors.white : const Color(0xFF0F2A2B),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
           const SizedBox(height: 4),
           Text(
@@ -269,7 +270,7 @@ class CorporateMetricCard extends StatelessWidget {
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: dark ? const Color(0xFFD7E2DC) : const Color(0xFF536D6D),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ],
       ),
@@ -379,7 +380,7 @@ class _ActionBannerCopy extends StatelessWidget {
             height: 1.1,
             fontWeight: FontWeight.w700,
             color: Colors.white,
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         Text(
@@ -388,7 +389,7 @@ class _ActionBannerCopy extends StatelessWidget {
             fontSize: responsive.bodyFontSize,
             height: 1.7,
             color: const Color(0xFFFFE8D8),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ],
     );

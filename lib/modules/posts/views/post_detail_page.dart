@@ -6,6 +6,7 @@ import '/core/routing/route_manager.dart';
 import '/modules/posts/data/models/post_model.dart';
 import '/modules/posts/data/services/post_service.dart';
 import '/shared/modules/app_shell/app_shell_responsive.dart';
+import '/shared/design/app_font_config.dart';
 
 class PostDetailPage extends StatelessWidget {
   const PostDetailPage({super.key, required this.slug});
@@ -107,7 +108,7 @@ class _PostHeader extends StatelessWidget {
               fontSize: 13,
               fontWeight: FontWeight.w800,
               letterSpacing: 1.1,
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
           const SizedBox(height: 16),
           Text(
@@ -117,7 +118,7 @@ class _PostHeader extends StatelessWidget {
               fontSize: responsive.isMobile ? 34 : 54,
               fontWeight: FontWeight.w700,
               height: 1.05,
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
           if (post.excerpt.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -127,7 +128,7 @@ class _PostHeader extends StatelessWidget {
                 color: const Color(0xFF53635C),
                 fontSize: 17,
                 height: 1.65,
-              ),
+              ).copyWith(fontFamilyFallback: appFontFallback),
             ),
           ],
         ],

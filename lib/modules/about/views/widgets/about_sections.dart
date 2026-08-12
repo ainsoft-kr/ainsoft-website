@@ -6,6 +6,7 @@ import '/modules/home/models/corporate_content_models.dart';
 import '/modules/home/widgets/corporate_page_components.dart';
 import '/modules/home/widgets/corporate_responsive.dart';
 import '/shared/design/assets.dart';
+import '/shared/design/app_font_config.dart';
 
 class AboutOverviewSection extends StatelessWidget {
   const AboutOverviewSection({super.key});
@@ -245,7 +246,7 @@ class _FounderPortraitCard extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0.8,
                           color: const Color(0xFFC86E42),
-                        ),
+                        ).copyWith(fontFamilyFallback: appFontFallback),
                       ),
                       const SizedBox(height: 6),
                       Text(
@@ -254,7 +255,7 @@ class _FounderPortraitCard extends StatelessWidget {
                           fontSize: responsive.isMobile ? 13 : 14,
                           height: 1.5,
                           color: const Color(0xFF375455),
-                        ),
+                        ).copyWith(fontFamilyFallback: appFontFallback),
                       ),
                     ],
                   ),
@@ -287,7 +288,7 @@ class _FounderBio extends StatelessWidget {
             fontWeight: FontWeight.w800,
             color: const Color(0xFF0F2A2B),
             height: 1.05,
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 10),
         Text(
@@ -296,7 +297,7 @@ class _FounderBio extends StatelessWidget {
             fontSize: responsive.isMobile ? 18 : 20,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFC86E42),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 16),
         _FounderMetaLine(text: controller.founderLocation),
@@ -310,7 +311,7 @@ class _FounderBio extends StatelessWidget {
               fontSize: responsive.bodyFontSize,
               height: 1.75,
               color: const Color(0xFF4C6767),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
           const SizedBox(height: 14),
         ],
@@ -355,7 +356,7 @@ class _FounderMetaLine extends StatelessWidget {
               height: 1.6,
               color: Color(0xFF375455),
               fontWeight: FontWeight.w600,
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ),
       ],
@@ -382,7 +383,7 @@ class _FounderTag extends StatelessWidget {
           fontSize: 13,
           fontWeight: FontWeight.w700,
           color: Color(0xFF0F2A2B),
-        ),
+        ).copyWith(fontFamilyFallback: appFontFallback),
       ),
     );
   }

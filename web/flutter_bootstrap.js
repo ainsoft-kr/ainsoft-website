@@ -6,7 +6,7 @@ _flutter.loader.load({
     window.setAinsoftLoadingStatus('렌더링 엔진을 초기화하고 있습니다');
     const appRunner = await engineInitializer.initializeEngine();
 
-    window.setAinsoftLoadingStatus('AINSOFT를 시작하고 있습니다');
+    window.setAinsoftLoadingStatus('앱과 한글 폰트를 준비하고 있습니다');
     await appRunner.runApp();
     window.hideAinsoftLoading();
   },

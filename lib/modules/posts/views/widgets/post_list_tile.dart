@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '/core/routing/route_manager.dart';
 import '/modules/posts/data/models/post_model.dart';
 import '/shared/modules/app_shell/app_shell_responsive.dart';
+import '/shared/design/app_font_config.dart';
 
 class PostListTile extends StatefulWidget {
   const PostListTile({super.key, required this.post});
@@ -49,7 +50,7 @@ class _PostListTileState extends State<PostListTile> {
                         style: GoogleFonts.dmSans(
                           color: const Color(0xFF6C7771),
                           fontSize: 13,
-                        ),
+                        ).copyWith(fontFamilyFallback: appFontFallback),
                       ),
                     ],
                   ),
@@ -63,7 +64,7 @@ class _PostListTileState extends State<PostListTile> {
                       fontSize: responsive.isMobile ? 22 : 24,
                       fontWeight: FontWeight.w700,
                       height: 1.15,
-                    ),
+                    ).copyWith(fontFamilyFallback: appFontFallback),
                   ),
                   if (widget.post.excerpt.isNotEmpty) ...[
                     const SizedBox(height: 12),
@@ -75,7 +76,7 @@ class _PostListTileState extends State<PostListTile> {
                         color: const Color(0xFF53635C),
                         fontSize: 14,
                         height: 1.55,
-                      ),
+                      ).copyWith(fontFamilyFallback: appFontFallback),
                     ),
                   ],
                   const Spacer(),
@@ -94,7 +95,7 @@ class _PostListTileState extends State<PostListTile> {
                               : const Color(0xFF28594B),
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                        ),
+                        ).copyWith(fontFamilyFallback: appFontFallback),
                       ),
                       AnimatedRotation(
                         duration: const Duration(milliseconds: 180),
@@ -139,7 +140,7 @@ class _PostBadge extends StatelessWidget {
             color: const Color(0xFF28594B),
             fontSize: 12,
             fontWeight: FontWeight.w700,
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 import '/shared/design/design.dart';
 import 'app_shell_responsive.dart';
 
@@ -225,7 +226,7 @@ class _BrandMark extends StatelessWidget {
               fontWeight: FontWeight.w700,
               letterSpacing: 1.2,
               color: const Color(0xFF0F2A2B),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ],
       ),
@@ -260,7 +261,7 @@ class _AppShellNavLink extends StatelessWidget {
         style: GoogleFonts.dmSans(
           fontWeight: FontWeight.w700,
           color: active ? const Color(0xFFC86E42) : const Color(0xFF224142),
-        ),
+        ).copyWith(fontFamilyFallback: appFontFallback),
       ),
     );
   }
@@ -360,7 +361,7 @@ class _FooterBrandBlock extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         Text(
@@ -369,7 +370,7 @@ class _FooterBrandBlock extends StatelessWidget {
             fontSize: 14,
             height: 1.7,
             color: const Color(0xFFD7E2DC),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 14),
         Text(
@@ -377,7 +378,7 @@ class _FooterBrandBlock extends StatelessWidget {
           style: GoogleFonts.dmSans(
             fontSize: 13,
             color: const Color(0xFFD7E2DC),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ],
     );
@@ -410,7 +411,7 @@ class _FooterLinkBlock extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         for (final link in links)
@@ -430,7 +431,7 @@ class _FooterLinkBlock extends StatelessWidget {
                           ? const Color(0xFFC86E42)
                           : const Color(0xFFD7E2DC),
                       fontWeight: FontWeight.w600,
-                    ),
+                    ).copyWith(fontFamilyFallback: appFontFallback),
                   ),
                 ),
               ),
@@ -474,22 +475,28 @@ class _FooterContactBlock extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         Text(
           'admin@ain.ai.kr',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 8),
         Text(
           '+82 10-2146-0818',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 8),
         Text(
           '154, Green-ro, Naju-si, Jeollanam-do, Republic of Korea',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ],
     );

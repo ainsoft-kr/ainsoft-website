@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 import '../widgets/corporate_page_components.dart';
 import '../widgets/corporate_responsive.dart';
 
@@ -193,7 +194,7 @@ class _HomeHeroCopy extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.w700,
               fontSize: responsive.isMobile ? 12 : 14,
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ),
         const SizedBox(height: 20),
@@ -204,7 +205,7 @@ class _HomeHeroCopy extends StatelessWidget {
             height: 1.02,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 18),
         ConstrainedBox(
@@ -217,7 +218,7 @@ class _HomeHeroCopy extends StatelessWidget {
               fontSize: responsive.isMobile ? 16 : 18,
               height: 1.7,
               color: const Color(0xFFD7E2DC),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ),
         const SizedBox(height: 28),
@@ -438,7 +439,7 @@ class _HomeTrustChip extends StatelessWidget {
           fontSize: responsive.isMobile ? 13 : 14,
           fontWeight: FontWeight.w700,
           color: const Color(0xFF224142),
-        ),
+        ).copyWith(fontFamilyFallback: appFontFallback),
       ),
     );
   }
