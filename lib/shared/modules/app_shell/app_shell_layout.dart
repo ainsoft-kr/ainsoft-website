@@ -7,7 +7,13 @@ import '/shared/design/app_font_config.dart';
 import '/shared/design/design.dart';
 import 'app_shell_responsive.dart';
 
-class AppShellLayout extends StatelessWidget {
+void _scrollShellToTop(BuildContext context) {
+  final controller = PrimaryScrollController.maybeOf(context);
+  if (controller == null || !controller.hasClients) return;
+  controller.jumpTo(0);
+}
+
+class AppShellLayout extends StatefulWidget {
   const AppShellLayout({
     super.key,
     required this.currentRoute,
@@ -16,6 +22,37 @@ class AppShellLayout extends StatelessWidget {
 
   final String currentRoute;
   final Widget child;
+
+  @override
+  State<AppShellLayout> createState() => _AppShellLayoutState();
+}
+
+class _AppShellLayoutState extends State<AppShellLayout> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void didUpdateWidget(covariant AppShellLayout oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.currentRoute == widget.currentRoute) return;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_scrollController.hasClients) return;
+      _scrollController.jumpTo(0);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,36 +69,40 @@ class AppShellLayout extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              _AppShellHeader(currentRoute: currentRoute),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) => SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                      child: Column(
-                        children: [
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 160),
-                            switchInCurve: Curves.easeOut,
-                            switchOutCurve: Curves.easeOut,
-                            transitionBuilder: (widget, animation) =>
-                                FadeTransition(opacity: animation, child: widget),
-                            child: KeyedSubtree(
-                              key: ValueKey(currentRoute),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: responsive.isMobile ? 20 : 28,
+          child: PrimaryScrollController(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                _AppShellHeader(currentRoute: widget.currentRoute),
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => SingleChildScrollView(
+                      controller: _scrollController,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                        child: Column(
+                          children: [
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 160),
+                              switchInCurve: Curves.easeOut,
+                              switchOutCurve: Curves.easeOut,
+                              transitionBuilder: (widget, animation) =>
+                                  FadeTransition(opacity: animation, child: widget),
+                              child: KeyedSubtree(
+                                key: ValueKey(widget.currentRoute),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: responsive.isMobile ? 20 : 28,
+                                  ),
+                                  child: widget.child,
                                 ),
-                                child: child,
                               ),
                             ),
-                          ),
-                          _AppShellFooter(
-                            responsive: responsive,
-                            currentRoute: currentRoute,
-                          ),
+                            _AppShellFooter(
+                              responsive: responsive,
+                              currentRoute: widget.currentRoute,
+                            ),
+                          ],
                         ],
                       ),
                     ),
@@ -146,7 +187,7 @@ class _AppShellHeader extends StatelessWidget {
                         _AppShellNavLink(
                           label: item.label,
                           active: _isActive(item.route),
-                          onTap: () => _navigate(item.route),
+                          onTap: () => _navigate(context, item.route),
                         ),
                       const SizedBox(width: 10),
                       const _ContactButton(fullWidth: false),
@@ -160,7 +201,7 @@ class _AppShellHeader extends StatelessWidget {
                           const Spacer(),
                           PopupMenuButton<String>(
                             tooltip: 'Open navigation',
-                            onSelected: _navigate,
+                            onSelected: (route) => _navigate(context, route),
                             itemBuilder: (context) => [
                               for (final item in items)
                                 PopupMenuItem<String>(
@@ -191,8 +232,11 @@ class _AppShellHeader extends StatelessWidget {
             currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
-  void _navigate(String route) {
-    if (_isActive(route)) return;
+  void _navigate(BuildContext context, String route) {
+    if (_isActive(route)) {
+      _scrollShellToTop(context);
+      return;
+    }
     RouteManager.offAll(route);
   }
 }
@@ -205,7 +249,10 @@ class _BrandMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: RouteManager.toInitial,
+      onTap: () {
+        _scrollShellToTop(context);
+        RouteManager.toInitial();
+      },
       borderRadius: BorderRadius.circular(16),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -275,7 +322,10 @@ class _ContactButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = FilledButton(
-      onPressed: RouteManager.toContact,
+      onPressed: () {
+        _scrollShellToTop(context);
+        RouteManager.toContact();
+      },
       style: FilledButton.styleFrom(
         backgroundColor: const Color(0xFF0F2A2B),
         foregroundColor: Colors.white,
@@ -421,7 +471,7 @@ class _FooterLinkBlock extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
-                onTap: () => _navigate(link.route),
+                onTap: () => _navigate(context, link.route),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                   child: Text(
@@ -451,8 +501,11 @@ class _FooterLinkBlock extends StatelessWidget {
             currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
-  void _navigate(String route) {
-    if (_isActive(route)) return;
+  void _navigate(BuildContext context, String route) {
+    if (_isActive(route)) {
+      _scrollShellToTop(context);
+      return;
+    }
     if (route == RouteManager.initialRoute) {
       RouteManager.toInitial();
       return;
