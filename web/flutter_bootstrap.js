@@ -8,6 +8,5 @@ _flutter.loader.load({
 
     window.setAinsoftLoadingStatus('앱과 한글 폰트를 준비하고 있습니다');
     await appRunner.runApp();
-    window.hideAinsoftLoading();
   },
 });

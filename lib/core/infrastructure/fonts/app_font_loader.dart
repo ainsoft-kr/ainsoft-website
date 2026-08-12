@@ -5,7 +5,7 @@ class AppFontLoader {
   AppFontLoader._();
 
   static const String family = 'Noto Sans KR';
-  static const String asset = 'google_fonts/NotoSansKR[wght].ttf';
+  static const String asset = 'google_fonts/NotoSansKR-critical[wght].ttf';
 
   static Future<void>? _loading;
   static bool _isReady = false;
