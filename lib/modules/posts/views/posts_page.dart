@@ -89,7 +89,7 @@ class _PostsIntro extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  '작업의 맥락을\n기록합니다.',
+                  '작업의 맥락을 기록합니다.',
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         color: const Color(0xFFF7F2EA),
                         fontWeight: FontWeight.w700,

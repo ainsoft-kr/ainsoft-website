@@ -1,5 +1,21 @@
 [
   {
+    "slug": "engineering-leader-day-to-day",
+    "title": "엔지니어링 리더의 하루는 무엇으로 채워지는가",
+    "date": "2026-08-12",
+    "category": "Engineering",
+    "excerpt": "엔지니어링 리더의 보이지 않는 업무를 정보·판단·영향력·실행·계획의 흐름으로 정리하고, 운영 자동화 제품에 적용할 수 있는 관점을 살펴봅니다.",
+    "markdownPath": "assets/posts/engineering-leader-day-to-day.md"
+  },
+  {
+    "slug": "hallmark-anti-ai-slop-design-skill",
+    "title": "Hallmark: AI가 만든 듯한 웹을 피하는 디자인 스킬",
+    "date": "2026-08-12",
+    "category": "Engineering",
+    "excerpt": "Nutlope의 Hallmark가 생성형 코딩 도구의 획일적인 UI를 줄이기 위해 테마, 구조, 안티패턴 검사와 재설계 흐름을 어떻게 묶었는지 살펴봅니다.",
+    "markdownPath": "assets/posts/hallmark-anti-ai-slop-design-skill.md"
+  },
+  {
     "slug": "minimal-coding-agent-vs-aisopsflow",
     "title": "최소주의 코딩 에이전트와 AISOpsFlow를 비교해보며",
     "date": "2026-08-02",
