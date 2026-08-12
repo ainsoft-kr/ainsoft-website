@@ -32,7 +32,7 @@ class _PostsListViewState extends State<PostsListView> {
   }
 
   @override
-  void didUpdateWidget(covariant PostsListView _) {
+  void didUpdateWidget(covariant PostsListView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_currentPage >= _pageCount) {
       _currentPage = _pageCount - 1;
