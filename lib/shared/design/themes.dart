@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app_font_config.dart';
+
 /// **Light Theme**
 ///
 /// Material 3 rosy-red seeded light theme.
@@ -23,7 +25,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   scaffoldBackgroundColor: const Color(0xFFF4F0E8),
   textTheme: GoogleFonts.dmSansTextTheme(ThemeData.light().textTheme).apply(
-    fontFamilyFallback: ['Apple SD Gothic Neo', 'Malgun Gothic', 'sans-serif'],
+    fontFamilyFallback: appFontFallback,
   ),
   appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
 );
@@ -49,7 +51,7 @@ final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
   ),
   textTheme: GoogleFonts.dmSansTextTheme(ThemeData.dark().textTheme).apply(
-    fontFamilyFallback: ['Apple SD Gothic Neo', 'Malgun Gothic', 'sans-serif'],
+    fontFamilyFallback: appFontFallback,
   ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,

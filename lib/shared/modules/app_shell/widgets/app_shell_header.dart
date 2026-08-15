@@ -3,9 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 import '/shared/design/design.dart';
 import '../app_shell_responsive.dart';
 import 'contact_button.dart';
+
+void _scrollShellToTop(BuildContext context) {
+  final controller = PrimaryScrollController.maybeOf(context);
+  if (controller == null || !controller.hasClients) return;
+  controller.jumpTo(0);
+}
 
 class AppShellHeader extends StatelessWidget {
   const AppShellHeader({super.key, required this.currentRoute});
@@ -77,7 +84,7 @@ class AppShellHeader extends StatelessWidget {
                         AppShellNavLink(
                           label: item.label,
                           active: _isActive(item.route),
-                          onTap: () => _navigate(item.route),
+                          onTap: () => _navigate(context, item.route),
                         ),
                       const SizedBox(width: 10),
                       const ContactButton(fullWidth: false),
@@ -91,7 +98,7 @@ class AppShellHeader extends StatelessWidget {
                           const Spacer(),
                           PopupMenuButton<String>(
                             tooltip: 'Open navigation',
-                            onSelected: _navigate,
+                            onSelected: (route) => _navigate(context, route),
                             itemBuilder: (context) => [
                               for (final item in items)
                                 PopupMenuItem<String>(
@@ -122,8 +129,11 @@ class AppShellHeader extends StatelessWidget {
             currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
-  void _navigate(String route) {
-    if (_isActive(route)) return;
+  void _navigate(BuildContext context, String route) {
+    if (_isActive(route)) {
+      _scrollShellToTop(context);
+      return;
+    }
     RouteManager.offAll(route);
   }
 }
@@ -136,7 +146,10 @@ class BrandMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: RouteManager.toInitial,
+      onTap: () {
+        _scrollShellToTop(context);
+        RouteManager.toInitial();
+      },
       borderRadius: BorderRadius.circular(16),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -157,7 +170,7 @@ class BrandMark extends StatelessWidget {
               fontWeight: FontWeight.w700,
               letterSpacing: 1.2,
               color: const Color(0xFF0F2A2B),
-            ),
+            ).copyWith(fontFamilyFallback: appFontFallback),
           ),
         ],
       ),
@@ -193,7 +206,7 @@ class AppShellNavLink extends StatelessWidget {
         style: GoogleFonts.dmSans(
           fontWeight: FontWeight.w700,
           color: active ? const Color(0xFFC86E42) : const Color(0xFF224142),
-        ),
+        ).copyWith(fontFamilyFallback: appFontFallback),
       ),
     );
   }

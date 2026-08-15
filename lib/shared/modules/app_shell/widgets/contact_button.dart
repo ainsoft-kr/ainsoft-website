@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import '/core/routing/route_manager.dart';
 
+void _scrollShellToTop(BuildContext context) {
+  final controller = PrimaryScrollController.maybeOf(context);
+  if (controller == null || !controller.hasClients) return;
+  controller.jumpTo(0);
+}
+
 class ContactButton extends StatelessWidget {
   const ContactButton({super.key, required this.fullWidth});
 
@@ -9,7 +15,10 @@ class ContactButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = FilledButton(
-      onPressed: RouteManager.toContact,
+      onPressed: () {
+        _scrollShellToTop(context);
+        RouteManager.toContact();
+      },
       style: FilledButton.styleFrom(
         backgroundColor: const Color(0xFF0F2A2B),
         foregroundColor: Colors.white,

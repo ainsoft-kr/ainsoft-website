@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /menu
+
+Sitemap: https://ain.ai.kr/sitemap.xml

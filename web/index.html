@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
   -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="AINSOFT corporate website">
+  <meta name="theme-color" content="#0F2A2B">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,74 +20,141 @@
 
   <title>AINSOFT</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Trebuchet MS", "Apple SD Gothic Neo", sans-serif;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: #f7f2ea;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .app-loading {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 16% 14%, rgba(198, 107, 61, 0.18), transparent 30%),
+        linear-gradient(135deg, #f7f2ea 0%, #eee4d3 54%, #e5ecdd 100%);
+      opacity: 1;
+      transition: opacity 360ms ease, visibility 360ms ease;
+    }
+
+    .app-loading.is-ready {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .app-loading__panel {
+      width: min(100%, 360px);
+      padding: 32px 30px 28px;
+      color: #f7f2ea;
+      background: #0f2a2b;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(15, 42, 43, 0.2);
+      box-sizing: border-box;
+    }
+
+    .app-loading__eyebrow {
+      color: #e3a16f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .app-loading__brand {
+      margin-top: 18px;
+      font-size: clamp(32px, 9vw, 48px);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .app-loading__brand span {
+      color: #e3a16f;
+    }
+
+    .app-loading__track {
+      height: 3px;
+      margin-top: 28px;
+      overflow: hidden;
+      background: rgba(215, 226, 220, 0.2);
+      border-radius: 99px;
+    }
+
+    .app-loading__track span {
+      display: block;
+      width: 42%;
+      height: 100%;
+      background: #e3a16f;
+      border-radius: inherit;
+      animation: loading-sweep 1.25s ease-in-out infinite;
+    }
+
+    .app-loading__status {
+      margin: 14px 0 0;
+      color: #d7e2dc;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @keyframes loading-sweep {
+      0% { transform: translateX(-130%); }
+      50%, 100% { transform: translateX(310%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .app-loading,
+      .app-loading__track span {
+        animation: none;
+        transition: none;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <div id="app-loading" class="app-loading" role="status" aria-live="polite">
+    <div class="app-loading__panel">
+      <div class="app-loading__eyebrow">DIGITAL OPERATIONS</div>
+      <div class="app-loading__brand">AIN<span>SOFT</span></div>
+      <div class="app-loading__track" aria-hidden="true">
+        <span></span>
+      </div>
+      <p id="app-loading-status" class="app-loading__status">서비스를 준비하고 있습니다</p>
+    </div>
+  </div>
+
   <script>
-    var serviceWorkerVersion = null;
-    var scriptLoaded = false;
-    function loadMainDartJs() {
-      if (scriptLoaded) {
-        return;
-      }
-      scriptLoaded = true;
-      var scriptTag = document.createElement('script');
-      scriptTag.src = 'main.dart.js';
-      scriptTag.type = 'application/javascript';
-      document.body.append(scriptTag);
-    }
+    (function () {
+      var loading = document.getElementById('app-loading');
+      var status = document.getElementById('app-loading-status');
 
-    if ('serviceWorker' in navigator) {
-      // Service workers are supported. Use them.
-      window.addEventListener('load', function () {
-        // Wait for registration to finish before dropping the <script> tag.
-        // Otherwise, the browser will load the script multiple times,
-        // potentially different versions.
-        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-        navigator.serviceWorker.register(serviceWorkerUrl)
-          .then((reg) => {
-            function waitForActivation(serviceWorker) {
-              serviceWorker.addEventListener('statechange', () => {
-                if (serviceWorker.state == 'activated') {
-                  console.log('Installed new service worker.');
-                  loadMainDartJs();
-                }
-              });
-            }
-            if (!reg.active && (reg.installing || reg.waiting)) {
-              // No active web worker and we have installed or are installing
-              // one for the first time. Simply wait for it to activate.
-              waitForActivation(reg.installing || reg.waiting);
-            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
-              // When the app updates the serviceWorkerVersion changes, so we
-              // need to ask the service worker to update.
-              console.log('New service worker available.');
-              reg.update();
-              waitForActivation(reg.installing);
-            } else {
-              // Existing service worker is still good.
-              console.log('Loading app from service worker.');
-              loadMainDartJs();
-            }
-          });
+      window.setAinsoftLoadingStatus = function (message) {
+        if (status) status.textContent = message;
+      };
 
-        // If service worker doesn't succeed in a reasonable amount of time,
-        // fallback to plaint <script> tag.
-        setTimeout(() => {
-          if (!scriptLoaded) {
-            console.warn(
-              'Failed to load app from service worker. Falling back to plain <script> tag.',
-            );
-            loadMainDartJs();
-          }
-        }, 4000);
-      });
-    } else {
-      // Service workers not supported. Just drop the <script> tag.
-      loadMainDartJs();
-    }
+      window.hideAinsoftLoading = function () {
+        if (!loading) return;
+        loading.classList.add('is-ready');
+        window.setTimeout(function () {
+          if (loading.parentNode) loading.parentNode.removeChild(loading);
+        }, 420);
+      };
+    })();
   </script>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

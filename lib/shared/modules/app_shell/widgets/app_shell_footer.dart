@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 import '../app_shell_responsive.dart';
+
+void _scrollShellToTop(BuildContext context) {
+  final controller = PrimaryScrollController.maybeOf(context);
+  if (controller == null || !controller.hasClients) return;
+  controller.jumpTo(0);
+}
 
 class AppShellFooter extends StatelessWidget {
   const AppShellFooter({
@@ -77,7 +84,7 @@ class FooterBrandBlock extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         Text(
@@ -86,7 +93,15 @@ class FooterBrandBlock extends StatelessWidget {
             fontSize: 14,
             height: 1.7,
             color: const Color(0xFFD7E2DC),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
+        ),
+        const SizedBox(height: 14),
+        Text(
+          '사업자등록번호 206-29-47109',
+          style: GoogleFonts.dmSans(
+            fontSize: 13,
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ],
     );
@@ -119,7 +134,7 @@ class FooterLinkBlock extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         for (final link in links)
@@ -129,7 +144,7 @@ class FooterLinkBlock extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
-                onTap: () => _navigate(link.route),
+                onTap: () => _navigate(context, link.route),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                   child: Text(
@@ -139,7 +154,7 @@ class FooterLinkBlock extends StatelessWidget {
                           ? const Color(0xFFC86E42)
                           : const Color(0xFFD7E2DC),
                       fontWeight: FontWeight.w600,
-                    ),
+                    ).copyWith(fontFamilyFallback: appFontFallback),
                   ),
                 ),
               ),
@@ -159,8 +174,11 @@ class FooterLinkBlock extends StatelessWidget {
             currentRoute.startsWith('${RouteManager.postsRoute}/'));
   }
 
-  void _navigate(String route) {
-    if (_isActive(route)) return;
+  void _navigate(BuildContext context, String route) {
+    if (_isActive(route)) {
+      _scrollShellToTop(context);
+      return;
+    }
     if (route == RouteManager.initialRoute) {
       RouteManager.toInitial();
       return;
@@ -183,22 +201,28 @@ class FooterContactBlock extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: const Color(0xFFF7F2EA),
-          ),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 12),
         Text(
           'admin@ain.ai.kr',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 8),
         Text(
           '+82 10-2146-0818',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
         const SizedBox(height: 8),
         Text(
           '154, Green-ro, Naju-si, Jeollanam-do, Republic of Korea',
-          style: GoogleFonts.dmSans(color: const Color(0xFFD7E2DC)),
+          style: GoogleFonts.dmSans(
+            color: const Color(0xFFD7E2DC),
+          ).copyWith(fontFamilyFallback: appFontFallback),
         ),
       ],
     );
