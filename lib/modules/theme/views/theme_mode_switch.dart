@@ -26,7 +26,7 @@ class ThemeModeSwitch extends StatelessWidget {
   /// Constructor for ThemeModeSwitch.
   const ThemeModeSwitch({super.key});
 
-  ThemeViewModel get controller => Modular.get<ThemeViewModel>();
+  ThemeViewModel get controller => inject<ThemeViewModel>();
 
   @override
   Widget build(BuildContext context) {

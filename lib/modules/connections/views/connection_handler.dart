@@ -45,7 +45,7 @@ class ConnectionHandler extends StatelessWidget {
     this.notConnectedWidget,
   });
 
-  ConnectionViewModel get controller => Modular.get<ConnectionViewModel>();
+  ConnectionViewModel get controller => inject<ConnectionViewModel>();
 
   /// Builds the UI based on the current connection state using an `Obx` widget.
   ///

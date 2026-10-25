@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide RouteManager;
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '/shared/presentation/custom/customs.dart';
 import '/shared/shared.dart';
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
 
   LoginPage({super.key});
 
-  AuthViewModel get controller => Modular.get<AuthViewModel>();
+  AuthViewModel get controller => inject<AuthViewModel>();
 
   @override
   Widget build(BuildContext context) {

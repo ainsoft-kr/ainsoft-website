@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide RouteManager;
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '/shared/shared.dart';
 import '/shared/utils/form_validators.dart';
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
 
   static final _formKey = GlobalKey<FormState>();
 
-  AuthViewModel get controller => Modular.get<AuthViewModel>();
+  AuthViewModel get controller => inject<AuthViewModel>();
 
   @override
   Widget build(BuildContext context) {

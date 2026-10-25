@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide RouteManager;
+import 'package:flutter_modular/flutter_modular.dart';
 import '/shared/shared.dart';
 import '../../../core/routing/route_manager.dart';
 import '/modules/locale/data/services/localization_service.dart';
@@ -12,7 +12,7 @@ import '../data/models/language_model.dart';
 class LanguagePickerDialog extends StatelessWidget {
   const LanguagePickerDialog({super.key});
 
-  LocalizationViewModel get controller => Modular.get<LocalizationViewModel>();
+  LocalizationViewModel get controller => inject<LocalizationViewModel>();
 
   @override
   Widget build(BuildContext context) {

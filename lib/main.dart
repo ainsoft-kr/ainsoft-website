@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '/app.dart';
 import '/app_module.dart';
+import '/core/routing/route_manager.dart';
 import '/core/infrastructure/fonts/app_font_loader.dart';
 import '/core/infrastructure/loading/app_loading_indicator.dart';
 import '/core/infrastructure/storage/app_storage_service.dart';
@@ -39,7 +40,9 @@ Future<void> main() async {
 
   runApp(
     ModularApp(
-      module: AppModule(),
+      module: appModule,
+      navigatorKey: RouteManager.navigatorKey,
+      defaultTransition: TransitionType.none,
       child: const App(),
     ),
   );

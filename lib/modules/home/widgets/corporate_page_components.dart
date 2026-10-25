@@ -93,7 +93,7 @@ class CorporatePageSection extends StatelessWidget {
                   SizedBox(
                     width: responsive.isMobile ? double.infinity : null,
                     child: FilledButton(
-                      onPressed: () => RouteManager.to(actionRoute!),
+                      onPressed: () => RouteManager.offAll(actionRoute!),
                       style: FilledButton.styleFrom(
                         backgroundColor: dark
                             ? const Color(0xFFC86E42)
@@ -418,7 +418,7 @@ class _ActionBannerButtons extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           FilledButton(
-            onPressed: () => RouteManager.to(primaryRoute),
+            onPressed: () => RouteManager.offAll(primaryRoute),
             style: FilledButton.styleFrom(
               backgroundColor: const Color(0xFF0F2A2B),
               foregroundColor: Colors.white,
@@ -429,7 +429,7 @@ class _ActionBannerButtons extends StatelessWidget {
           if (secondaryLabel != null && secondaryRoute != null) ...[
             const SizedBox(height: 12),
             OutlinedButton(
-              onPressed: () => RouteManager.to(secondaryRoute!),
+              onPressed: () => RouteManager.offAll(secondaryRoute!),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
                 side: const BorderSide(color: Color(0xFFFFE8D8)),
@@ -450,7 +450,7 @@ class _ActionBannerButtons extends StatelessWidget {
       runSpacing: 12,
       children: [
         FilledButton(
-          onPressed: () => RouteManager.to(primaryRoute),
+          onPressed: () => RouteManager.offAll(primaryRoute),
           style: FilledButton.styleFrom(
             backgroundColor: const Color(0xFF0F2A2B),
             foregroundColor: Colors.white,
@@ -460,7 +460,7 @@ class _ActionBannerButtons extends StatelessWidget {
         ),
         if (secondaryLabel != null && secondaryRoute != null)
           OutlinedButton(
-            onPressed: () => RouteManager.to(secondaryRoute!),
+            onPressed: () => RouteManager.offAll(secondaryRoute!),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
               side: const BorderSide(color: Color(0xFFFFE8D8)),

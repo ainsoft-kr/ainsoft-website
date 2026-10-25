@@ -16,8 +16,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeVM = Modular.get<ThemeViewModel>();
-    final localeVM = Modular.get<LocalizationViewModel>();
+    final themeVM = inject<ThemeViewModel>();
+    final localeVM = inject<LocalizationViewModel>();
 
     return GlobalLoaderOverlay(
       overlayWidgetBuilder: (context) => const SpinKitCubeGrid(
@@ -28,7 +28,7 @@ class App extends StatelessWidget {
         child: AnimatedBuilder(
           animation: Listenable.merge([themeVM, localeVM]),
           builder: (context, _) => MaterialApp.router(
-            routerConfig: Modular.routerConfig,
+            routerConfig: ModularApp.routerConfigOf(context),
             scaffoldMessengerKey: rootScaffoldMessengerKey,
             locale: localeVM.locale,
             supportedLocales: LocalizationService.supportedLocales,

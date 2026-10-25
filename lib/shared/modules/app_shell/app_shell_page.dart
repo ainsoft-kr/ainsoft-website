@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide RouteManager;
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '/core/routing/route_manager.dart';
 import '/modules/about/views/about_page.dart';
@@ -17,25 +17,21 @@ class SiteShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Modular.to,
-      builder: (context, _) {
-        final currentRoute = RouteManager.currentRoute;
-        return AppShellLayout(
-          currentRoute: currentRoute,
-          child: switch (currentRoute) {
-            RouteManager.initialRoute || RouteManager.homeRoute => const HomePage(),
-            RouteManager.aboutRoute => const AboutPage(),
-            RouteManager.productsRoute => const ProductsPage(),
-            RouteManager.solutionsRoute => const SolutionsPage(),
-            RouteManager.servicesRoute => const ServicesPage(),
-            RouteManager.postsRoute => const PostsPage(),
-            RouteManager.contactRoute => const ContactPage(),
-            _ when currentRoute.startsWith('${RouteManager.postsRoute}/') =>
-                PostDetailPage(slug: Modular.args.params['slug'] ?? ''),
-            _ => const HomePage(),
-          },
-        );
+    final state = context.routeState();
+    final currentRoute = RouteManager.pathOf(state);
+    return AppShellLayout(
+      currentRoute: currentRoute,
+      child: switch (currentRoute) {
+        RouteManager.initialRoute || RouteManager.homeRoute => const HomePage(),
+        RouteManager.aboutRoute => const AboutPage(),
+        RouteManager.productsRoute => const ProductsPage(),
+        RouteManager.solutionsRoute => const SolutionsPage(),
+        RouteManager.servicesRoute => const ServicesPage(),
+        RouteManager.postsRoute => const PostsPage(),
+        RouteManager.contactRoute => const ContactPage(),
+        _ when currentRoute.startsWith('${RouteManager.postsRoute}/') =>
+          PostDetailPage(slug: state['slug'] ?? ''),
+        _ => const HomePage(),
       },
     );
   }

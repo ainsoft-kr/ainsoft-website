@@ -15,7 +15,7 @@ class ConnectionOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Modular.get<ConnectionViewModel>();
+    final controller = inject<ConnectionViewModel>();
 
     return Stack(
       children: [

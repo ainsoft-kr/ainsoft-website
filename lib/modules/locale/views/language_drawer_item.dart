@@ -21,7 +21,7 @@ class LanguageDrawerItem extends StatelessWidget {
   /// Creates a [LanguageDrawerItem].
   const LanguageDrawerItem({super.key});
 
-  LocalizationViewModel get controller => Modular.get<LocalizationViewModel>();
+  LocalizationViewModel get controller => inject<LocalizationViewModel>();
 
   @override
   Widget build(BuildContext context) {
