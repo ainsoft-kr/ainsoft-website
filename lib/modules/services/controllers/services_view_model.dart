@@ -2,15 +2,25 @@ import '/modules/home/models/corporate_content_models.dart';
 import '/modules/services/data/services_content.dart';
 
 class ServicesViewModel {
-  List<SiteCardData> get buildAreas => ServicesContent.buildAreas;
+  List<CorporateInfoCardData> get overviewCards =>
+      ServicesContent.overviewCards;
 
-  List<(String, String)> get extendedAreas => ServicesContent.extendedAreas;
+  List<CorporateInfoCardData> get internvlCards =>
+      ServicesContent.internvlCards;
 
-  List<SiteSpecData> get modelSpecs => ServicesContent.modelSpecs;
+  List<CorporateInfoCardData> get llmServiceCards =>
+      ServicesContent.llmServiceCards;
 
-  List<SiteSpecData> get stackSpecs => ServicesContent.stackSpecs;
+  List<CorporateInfoCardData> get readyServiceCards =>
+      ServicesContent.readyServiceCards;
 
-  List<SiteRepoData> get modelRepos => ServicesContent.modelRepos;
+  List<CorporateInfoCardData> get extendedServiceCards =>
+      ServicesContent.extendedServiceCards;
 
-  List<SiteRepoData> get stackRepos => ServicesContent.stackRepos;
+  List<CorporateInfoCardData> get llmStackCards => ServicesContent.llmStackCards;
+
+  List<CorporateMetricData> get internvlMetrics =>
+      ServicesContent.internvlMetrics;
+
+  List<CorporateMetricData> get llmMetrics => ServicesContent.llmMetrics;
 }

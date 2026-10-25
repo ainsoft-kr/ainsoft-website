@@ -1,236 +1,351 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/core/routing/route_manager.dart';
-import '../models/corporate_content_models.dart';
+import '/shared/design/app_font_config.dart';
+import '../widgets/corporate_page_components.dart';
 import '../widgets/corporate_responsive.dart';
-import '../widgets/site_components.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final _flowKey = GlobalKey();
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        _HomeHero(onShowFlow: () => scrollToKey(_flowKey)),
-        const _HomeOfferSection(),
-        _HomeFlowSection(key: _flowKey),
-        const _HomeScenarioSection(),
-        const _HomeTrustSection(),
-        const SiteFinalCta(
-          title: '우리 팀의 반복 업무부터 함께 정리해 보세요',
-          subtitle: '현재 운영 흐름이나 현장 데이터를 들려주시면, 자동화와 AI가 들어갈 지점을 같이 찾아드립니다.',
+        _HomeHeroSection(),
+        _HomeTrustStrip(),
+        CorporatePageSection(
+          label: 'Positioning',
+          title: '복잡한 운영을 자동화와 지식으로 더 단순하게 만듭니다.',
+          description:
+              'AISOpsFlow는 운영 이벤트를 실행 가능한 워크플로우로 바꾸고, Ainsoft RAG는 문서와 정책을 검색 가능한 지식 레이어로 만듭니다. AINSOFT는 두 제품을 통해 운영팀이 더 빠르게 판단하고 더 안전하게 실행하도록 돕습니다.',
+          actionLabel: 'About 보기',
+          actionRoute: RouteManager.aboutRoute,
+          child: CorporateResponsiveWrap(
+            children: [
+              CorporateInfoCard(
+                title: '운영 자동화 축',
+                body:
+                    'AISOpsFlow는 alerts, approval, actions, reporting을 하나의 흐름으로 연결해 반복적인 운영 절차를 표준화합니다.',
+              ),
+              CorporateInfoCard(
+                title: '지식검색 축',
+                body:
+                    'Ainsoft RAG는 서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진으로 운영 문서와 정책을 빠르게 찾게 합니다.',
+              ),
+              CorporateInfoCard(
+                title: '통합 운영 경험',
+                body:
+                    '실행은 AISOpsFlow가 맡고, 검색과 근거 제공은 Ainsoft RAG가 맡아 운영팀이 하나의 흐름 안에서 대응할 수 있습니다.',
+              ),
+            ],
+          ),
+        ),
+        CorporatePageSection(
+          label: 'Products',
+          title: 'AISOpsFlow와 Ainsoft RAG, 서로 다른 역할의 두 제품 라인업.',
+          description:
+              'AISOpsFlow는 하이브리드 실행 구조와 플러그인 확장성으로, Ainsoft RAG는 임베디드 검색 엔진과 Spring Boot starter 구성으로 설계되었습니다.',
+          dark: true,
+          actionLabel: 'Products 보기',
+          actionRoute: RouteManager.productsRoute,
+          child: CorporateResponsiveWrap(
+            children: [
+              CorporateInfoCard(
+                title: 'AISOpsFlow',
+                body: '운영 이벤트 이후 승인, 실행, 보고를 실제 워크플로우로 연결하는 운영 자동화 플랫폼입니다.',
+                accentLabel: 'Ops Automation',
+                dark: true,
+              ),
+              CorporateInfoCard(
+                title: 'Ainsoft RAG',
+                body:
+                    '서비스 안에 직접 넣을 수 있는 Lucene 기반 임베디드 RAG 엔진과 starter 제품군입니다.',
+                accentLabel: 'Knowledge Retrieval',
+                dark: true,
+              ),
+              CorporateInfoCard(
+                title: 'Together',
+                body:
+                    '하나는 실행 자동화를, 다른 하나는 지식검색을 담당해 단독으로도 명확하고 함께 쓸 때 더 강한 운영 경험을 제공합니다.',
+                accentLabel: 'Combined Value',
+                dark: true,
+              ),
+            ],
+          ),
+        ),
+        CorporatePageSection(
+          label: 'Solutions',
+          title: '현장의 운영 문제를 실제 흐름에 맞게 풀어냅니다.',
+          description:
+              '운영 이벤트 대응, 서비스데스크, 내부 지식검색, 온프레미스 환경까지 각 조직의 현실에 맞는 적용 시나리오를 제공합니다.',
+          actionLabel: 'Solutions 보기',
+          actionRoute: RouteManager.solutionsRoute,
+          child: CorporateResponsiveWrap(
+            children: [
+              CorporateInfoCard(
+                title: '운영 이벤트 대응 자동화',
+                body: '이벤트 발생 이후 승인과 실행을 연결하고, 반복 대응을 표준 워크플로우로 운영합니다.',
+              ),
+              CorporateInfoCard(
+                title: '지식 기반 운영 지원',
+                body:
+                    '매뉴얼, 정책, 장애 이력을 검색 가능한 지식 계층으로 묶어 운영 판단 속도와 응답 품질을 높입니다.',
+              ),
+              CorporateInfoCard(
+                title: '운영 코파일럿 구성',
+                body: '자동화 실행과 검색 근거 제공을 하나의 흐름으로 묶어 더 빠르고 일관된 운영 경험을 만듭니다.',
+              ),
+            ],
+          ),
+        ),
+        CorporateActionBanner(
+          title: '운영 자동화와 지식검색을 하나의 전략으로 연결해보세요.',
+          description:
+              'AISOpsFlow와 Ainsoft RAG를 조합하면 운영팀의 실행 속도와 판단 품질을 동시에 높일 수 있습니다.',
+          primaryLabel: '문의하기',
+          primaryRoute: RouteManager.contactRoute,
+          secondaryLabel: 'Solutions 보기',
+          secondaryRoute: RouteManager.solutionsRoute,
         ),
       ],
     );
   }
 }
 
-class _HomeHero extends StatelessWidget {
-  const _HomeHero({required this.onShowFlow});
-
-  final VoidCallback onShowFlow;
+class _HomeHeroSection extends StatelessWidget {
+  const _HomeHeroSection();
 
   @override
   Widget build(BuildContext context) {
     final responsive = CorporateResponsive.of(context);
-    final leadSize = responsive.isMobile ? 17.0 : 20.0;
-    final strong = siteText(fontSize: leadSize, fontWeight: FontWeight.w700);
 
-    return SiteBand(
-      verticalPadding: responsive.isMobile
-          ? 48
-          : responsive.isTablet
-          ? 80
-          : 112,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '운영 자동화 제품 · 현장 맞춤 AI 구축',
-            style: siteText(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: SiteColors.muted,
+    return Padding(
+      padding: responsive.sectionPadding.copyWith(
+        top: responsive.isMobile ? 2 : 4,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: responsive.maxContentWidth),
+          child: Container(
+            padding: EdgeInsets.all(
+              responsive.isMobile
+                  ? 20
+                  : responsive.isTablet
+                  ? 26
+                  : 32,
             ),
-          ),
-          const SizedBox(height: 16),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 860),
-            child: Semantics(
-              header: true,
-              child: Text(
-                // Explicit breaks keep "워크플로우" from splitting mid-word.
-                responsive.isMobile
-                    ? '운영팀이 반복하던 일을\nAI 워크플로우로\n바꿉니다.'
-                    : '운영팀이 반복하던 일을\nAI 워크플로우로 바꿉니다.',
-                style: siteText(
-                  // 30 keeps the first line on one row down to 360px wide.
-                  fontSize: responsive.isMobile ? 30 : responsive.heroTitleSize,
-                  fontWeight: FontWeight.w800,
-                  height: 1.18,
-                  letterSpacing: -0.8,
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F2A2B),
+              borderRadius: BorderRadius.circular(
+                responsive.isMobile ? 26 : 36,
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x220F2A2B),
+                  blurRadius: 30,
+                  offset: Offset(0, 18),
                 ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 640),
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(text: 'AINSOFT는 '),
-                  TextSpan(text: '운영 자동화 제품', style: strong),
-                  const TextSpan(text: '(AISOpsFlow · Ainsoft RAG)과 현장에 맞춘 '),
-                  TextSpan(text: 'AI 구축 서비스', style: strong),
-                  const TextSpan(text: '를 제공합니다.'),
-                ],
-              ),
-              style: siteText(
-                fontSize: leadSize,
-                height: 1.6,
-                color: SiteColors.ink2,
-              ),
-            ),
-          ),
-          const SizedBox(height: 36),
-          Wrap(
-            spacing: 24,
-            runSpacing: 20,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              SitePrimaryCta(fullWidth: responsive.isMobile),
-              SiteArrowLink(label: '어떻게 동작하나요', onTap: onShowFlow),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HomeOfferSection extends StatelessWidget {
-  const _HomeOfferSection();
-
-  static const _product = SiteCardData(
-    kind: '제품',
-    title: '운영 자동화 플랫폼',
-    body: '반복되는 대응 절차는 자동으로 실행하고, 필요한 판단 근거는 바로 찾아줍니다.',
-    items: [
-      ('AISOpsFlow', '알림 → 승인 → 실행 → 보고 자동화'),
-      ('Ainsoft RAG', '매뉴얼 · 정책 · 장애 이력 검색'),
-    ],
-    note: '함께 쓸 때 가장 강력하고, 하나씩 도입할 수도 있습니다.',
-    linkLabel: '제품 자세히 보기',
-  );
-
-  static const _service = SiteCardData(
-    kind: '구축 서비스',
-    title: '현장 맞춤 AI 구축',
-    body: '이미지, 영상, 문서를 읽는 AI를 고객 현장과 데이터에 맞춰 설계하고 구축합니다.',
-    items: [
-      ('현장 시각 AI', '공정 이상 징후 · 안전관제 영상 분석'),
-      ('문서 · 도면 AI', '기술 문서 · 검사 리포트 질의응답'),
-    ],
-    note: '외부 반출이 어려운 환경을 위한 사내 LLM 구축도 함께 합니다.',
-    linkLabel: '구축 서비스 자세히 보기',
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return SiteBand(
-      color: SiteColors.surface,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SiteSectionHeading(
-            title: 'AINSOFT가 제공하는 두 가지',
-            subtitle: '바로 도입하는 제품과, 우리 현장에 맞게 만드는 구축 서비스.',
-          ),
-          SiteColumns(
-            columns: 2,
-            gap: 20,
-            stretch: true,
-            children: [
-              SiteOfferCard(data: _product, onLink: RouteManager.toProducts),
-              SiteOfferCard(data: _service, onLink: RouteManager.toServices),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _FlowStepData {
-  const _FlowStepData(this.title, this.body, this.owner, {this.human = false});
-
-  final String title;
-  final String body;
-  final String owner;
-  final bool human;
-}
-
-class _HomeFlowSection extends StatelessWidget {
-  const _HomeFlowSection({super.key});
-
-  static const _steps = [
-    _FlowStepData('감지', '장애 · 티켓 · 이벤트 알림 수신', 'AISOpsFlow'),
-    _FlowStepData('근거 찾기', '관련 매뉴얼과 과거 처리 이력 자동 검색', 'Ainsoft RAG'),
-    _FlowStepData('승인', '담당자는 확인하고 승인만', '사람', human: true),
-    _FlowStepData('실행', '정해진 대응 절차를 자동 실행', 'AISOpsFlow'),
-    _FlowStepData('보고', '처리 결과를 채널로 자동 공유', 'AISOpsFlow'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final responsive = CorporateResponsive.of(context);
-    final steps = [
-      for (var i = 0; i < _steps.length; i++)
-        _FlowStep(index: i + 1, data: _steps[i]),
-    ];
-
-    return SiteBand(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SiteSectionHeading(
-            title: '알림이 오면, 다음 일은 워크플로우가 합니다',
-            subtitle: '운영팀은 반복 작업 대신 승인과 판단에만 집중합니다.',
-          ),
-          if (responsive.isBrowser)
-            IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  for (var i = 0; i < steps.length; i++) ...[
-                    if (i > 0) const SizedBox(width: 8),
-                    Expanded(child: steps[i]),
-                  ],
-                ],
-              ),
-            )
-          else
-            Column(
-              children: [
-                for (var i = 0; i < steps.length; i++) ...[
-                  if (i > 0) const SizedBox(height: 10),
-                  steps[i],
-                ],
               ],
             ),
-          const SizedBox(height: 24),
-          SiteArrowLink(
-            label: '개발자를 위한 제품 구조 보기',
-            onTap: RouteManager.toProducts,
+            child: responsive.isBrowser
+                ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Expanded(flex: 7, child: _HomeHeroCopy()),
+                      SizedBox(width: 24),
+                      Expanded(flex: 5, child: _HomeHeroPanels()),
+                    ],
+                  )
+                : const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _HomeHeroCopy(),
+                      SizedBox(height: 16),
+                      _HomeHeroPanels(),
+                    ],
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeHeroCopy extends StatelessWidget {
+  const _HomeHeroCopy();
+
+  @override
+  Widget build(BuildContext context) {
+    final responsive = CorporateResponsive.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFFC86E42),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            'AINSOFT PRODUCT SUITE',
+            style: GoogleFonts.dmSans(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: responsive.isMobile ? 12 : 14,
+            ).copyWith(fontFamilyFallback: appFontFallback),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          '운영 자동화와 지식검색을 하나의 흐름으로 연결합니다.',
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: responsive.heroTitleSize,
+            height: 1.02,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFFF7F2EA),
+          ).copyWith(fontFamilyFallback: appFontFallback),
+        ),
+        const SizedBox(height: 18),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: responsive.isBrowser ? 620 : double.infinity,
+          ),
+          child: Text(
+            'AISOpsFlow는 운영 이벤트를 실행 가능한 워크플로우로 바꾸고, Ainsoft RAG는 문서와 정책을 검색 가능한 지식 레이어로 만듭니다. 더 빠른 대응, 더 정확한 판단, 더 안전한 실행을 위해 설계된 AINSOFT의 제품 조합입니다.',
+            style: GoogleFonts.dmSans(
+              fontSize: responsive.isMobile ? 16 : 18,
+              height: 1.7,
+              color: const Color(0xFFD7E2DC),
+            ).copyWith(fontFamilyFallback: appFontFallback),
+          ),
+        ),
+        const SizedBox(height: 28),
+        responsive.isMobile
+            ? const _HeroButtonColumn()
+            : const _HeroButtonWrap(),
+      ],
+    );
+  }
+}
+
+class _HeroButtonColumn extends StatelessWidget {
+  const _HeroButtonColumn();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FilledButton(
+          onPressed: RouteManager.toProducts,
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color(0xFFC86E42),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          ),
+          child: const Text('Products 보기'),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton(
+          onPressed: RouteManager.toSolutions,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: const Color(0xFFF7F2EA),
+            side: const BorderSide(color: Color(0xFFBBD0C6)),
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          ),
+          child: const Text('Solutions 보기'),
+        ),
+      ],
+    );
+  }
+}
+
+class _HeroButtonWrap extends StatelessWidget {
+  const _HeroButtonWrap();
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 14,
+      runSpacing: 14,
+      children: [
+        FilledButton(
+          onPressed: RouteManager.toProducts,
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color(0xFFC86E42),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          ),
+          child: const Text('Products 보기'),
+        ),
+        OutlinedButton(
+          onPressed: RouteManager.toSolutions,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: const Color(0xFFF7F2EA),
+            side: const BorderSide(color: Color(0xFFBBD0C6)),
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          ),
+          child: const Text('Solutions 보기'),
+        ),
+      ],
+    );
+  }
+}
+
+class _HomeHeroPanels extends StatelessWidget {
+  const _HomeHeroPanels();
+
+  @override
+  Widget build(BuildContext context) {
+    final responsive = CorporateResponsive.of(context);
+
+    return Column(
+      children: [
+        const CorporateInfoCard(
+          title: 'Built for Real Operations',
+          body:
+              'AISOpsFlow는 실행을 자동화하고, Ainsoft RAG는 필요한 근거를 즉시 찾게 합니다. 두 제품은 운영 현장에서 바로 쓰일 수 있도록 설계되었습니다.',
+          accentLabel: 'AINSOFT',
+        ),
+        SizedBox(height: responsive.gap),
+        const _HomeStatPanel(),
+      ],
+    );
+  }
+}
+
+class _HomeStatPanel extends StatelessWidget {
+  const _HomeStatPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    final responsive = CorporateResponsive.of(context);
+
+    return Container(
+      padding: EdgeInsets.all(responsive.isMobile ? 16 : 22),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(responsive.isMobile ? 20 : 28),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+      ),
+      child: const CorporateResponsiveWrap(
+        children: [
+          CorporateMetricCard(
+            value: 'From Alert',
+            label: '알림 다음은 왜 실행일까',
+            dark: true,
+          ),
+          CorporateMetricCard(
+            value: 'RAG Inside',
+            label: '검색은 왜 밖이 아니라 안에 있을까',
+            dark: true,
+          ),
+          CorporateMetricCard(
+            value: 'Split Runtime',
+            label: '실행 구조를 왜 둘로 나눴을까',
+            dark: true,
           ),
         ],
       ),
@@ -238,154 +353,93 @@ class _HomeFlowSection extends StatelessWidget {
   }
 }
 
-class _FlowStep extends StatelessWidget {
-  const _FlowStep({required this.index, required this.data});
-
-  final int index;
-  final _FlowStepData data;
+class _HomeTrustStrip extends StatelessWidget {
+  const _HomeTrustStrip();
 
   @override
   Widget build(BuildContext context) {
-    final human = data.human;
-    final fg = human ? SiteColors.onInk : SiteColors.ink;
-    final fgMuted = human ? SiteColors.onInkMuted : SiteColors.muted;
+    final responsive = CorporateResponsive.of(context);
 
-    return Semantics(
-      label: '$index단계 ${data.title}: ${data.body}, 담당 ${data.owner}',
-      excludeSemantics: true,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(18, 20, 18, 20),
-        decoration: BoxDecoration(
-          color: human ? SiteColors.ink : SiteColors.surface,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: human ? SiteColors.ink : SiteColors.line),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              index.toString().padLeft(2, '0'),
-              style: GoogleFonts.spaceGrotesk(fontSize: 13, color: fgMuted),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        responsive.sectionPadding.left,
+        responsive.isMobile ? 14 : 20,
+        responsive.sectionPadding.right,
+        responsive.isMobile ? 14 : 20,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: responsive.isBrowser ? 980 : responsive.maxContentWidth,
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: responsive.isMobile ? 14 : 20,
+              vertical: responsive.isMobile ? 14 : 18,
             ),
-            const SizedBox(height: 6),
-            Text(
-              data.title,
-              style: siteText(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: fg,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF7F2EA),
+              borderRadius: BorderRadius.circular(
+                responsive.isMobile ? 24 : 32,
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              data.body,
-              style: siteText(fontSize: 14, height: 1.5, color: fgMuted),
-            ),
-            const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: human
-                    ? Colors.white.withValues(alpha: 0.14)
-                    : SiteColors.sand,
-                borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                color: const Color(0xFF0F2A2B).withValues(alpha: 0.08),
               ),
-              child: Text(
-                data.owner,
-                style: siteText(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: human ? SiteColors.onInk : SiteColors.ink2,
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x180F2A2B),
+                  blurRadius: 28,
+                  offset: Offset(0, 16),
                 ),
-              ),
+              ],
             ),
-          ],
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: responsive.gap,
+              runSpacing: responsive.gap,
+              children: const [
+                _HomeTrustChip(label: 'AISOpsFlow'),
+                _HomeTrustChip(label: 'Ainsoft RAG'),
+                _HomeTrustChip(label: 'Ops Automation'),
+                _HomeTrustChip(label: 'Embedded RAG'),
+                _HomeTrustChip(label: 'Hybrid Secure Runtime'),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-class _HomeScenarioSection extends StatelessWidget {
-  const _HomeScenarioSection();
+class _HomeTrustChip extends StatelessWidget {
+  const _HomeTrustChip({required this.label});
 
-  static const _scenarios = [
-    SiteScenarioData(
-      who: 'IT 운영 · 관제',
-      kind: '제품',
-      title: '새벽 장애 알림',
-      before: '당직자가 매뉴얼을 찾고, 담당자에게 전화하고, 직접 조치',
-      after: '근거와 조치안이 함께 도착하고, 승인 한 번으로 실행',
-    ),
-    SiteScenarioData(
-      who: '제조 · 안전관제',
-      kind: '구축 서비스',
-      title: '매일 쌓이는 검사 이미지',
-      before: '검사자가 이미지와 영상을 하나씩 눈으로 확인',
-      after: 'AI가 이상 징후만 골라 근거와 함께 알림',
-    ),
-    SiteScenarioData(
-      who: '규제 산업 · 온프레미스',
-      kind: '제품 + 구축',
-      title: '데이터를 밖으로 못 내보내는 환경',
-      before: '보안 정책 때문에 자동화와 AI 도입을 미룸',
-      after: '실행과 검색 모두 사내에서, 권한 통제 안에서',
-    ),
-  ];
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return SiteBand(
-      color: SiteColors.surface,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SiteSectionHeading(
-            title: '이런 팀에서 달라집니다',
-            subtitle: '도입 전과 후, 운영팀의 하루가 어떻게 바뀌는지.',
-          ),
-          SiteColumns(
-            children: [
-              for (final scenario in _scenarios)
-                SiteScenarioItem(data: scenario),
-            ],
-          ),
-          const SizedBox(height: 32),
-          SiteArrowLink(label: '활용 사례 더 보기', onTap: RouteManager.toSolutions),
-        ],
+    final responsive = CorporateResponsive.of(context);
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: responsive.isMobile ? 14 : 16,
+        vertical: responsive.isMobile ? 10 : 12,
       ),
-    );
-  }
-}
-
-class _HomeTrustSection extends StatelessWidget {
-  const _HomeTrustSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return const SiteBand(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SiteSectionHeading(title: '도입이 부담스럽지 않도록'),
-          SiteColumns(
-            children: [
-              SiteTextItem(
-                title: '데이터는 사내에',
-                body: '실행 엔진은 고객 환경 안에서 동작하고, 클라우드와는 암호화된 채널로만 연결됩니다.',
-              ),
-              SiteTextItem(
-                title: '권한대로만 검색',
-                body: '문서 검색은 접근 권한을 따라, 볼 수 있는 사람에게만 보입니다.',
-              ),
-              SiteTextItem(
-                title: '쓰던 도구 그대로',
-                body: 'Slack, 이메일, 카카오 등 기존 채널과 서비스에 붙여 씁니다.',
-              ),
-            ],
-          ),
-        ],
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.82),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: const Color(0xFF0F2A2B).withValues(alpha: 0.06),
+        ),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.dmSans(
+          fontSize: responsive.isMobile ? 13 : 14,
+          fontWeight: FontWeight.w700,
+          color: const Color(0xFF224142),
+        ).copyWith(fontFamilyFallback: appFontFallback),
       ),
     );
   }

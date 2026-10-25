@@ -2,16 +2,20 @@ import '/modules/products/data/products_content.dart';
 import '/modules/home/models/corporate_content_models.dart';
 
 class ProductsViewModel {
-  List<SiteCardData> get productCards => ProductsContent.productCards;
+  List<CorporateInfoCardData> get productCards => ProductsContent.productCards;
 
-  List<(String, String, String?)> get adoptionOptions =>
-      ProductsContent.adoptionOptions;
+  List<CorporateInfoCardData> get valueCards => ProductsContent.valueCards;
 
-  List<SiteSpecData> get aisopsflowSpecs => ProductsContent.aisopsflowSpecs;
+  List<CorporateInfoCardData> get aisopsflowCards =>
+      ProductsContent.aisopsflowCards;
 
-  List<SiteSpecData> get ragSpecs => ProductsContent.ragSpecs;
+  List<CorporateInfoCardData> get ragCards => ProductsContent.ragCards;
 
-  List<SiteRepoData> get aisopsflowRepos => ProductsContent.aisopsflowRepos;
+  List<CorporateInfoCardData> get productFitCards =>
+      ProductsContent.productFitCards;
 
-  List<SiteRepoData> get ragRepos => ProductsContent.ragRepos;
+  List<CorporateInfoCardData> get openSourceCards =>
+      ProductsContent.openSourceCards;
+
+  List<CorporateMetricData> get metrics => ProductsContent.metrics;
 }

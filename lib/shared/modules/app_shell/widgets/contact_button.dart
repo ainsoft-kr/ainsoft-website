@@ -8,14 +8,9 @@ void _scrollShellToTop(BuildContext context) {
 }
 
 class ContactButton extends StatelessWidget {
-  const ContactButton({
-    super.key,
-    required this.fullWidth,
-    this.compact = false,
-  });
+  const ContactButton({super.key, required this.fullWidth});
 
   final bool fullWidth;
-  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +20,11 @@ class ContactButton extends StatelessWidget {
         RouteManager.toContact();
       },
       style: FilledButton.styleFrom(
-        backgroundColor: const Color(0xFFC86E42),
+        backgroundColor: const Color(0xFF0F2A2B),
         foregroundColor: Colors.white,
-        padding: compact
-            ? const EdgeInsets.symmetric(horizontal: 14, vertical: 10)
-            : const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       ),
-      child: const Text('도입 상담'),
+      child: const Text('문의하기'),
     );
 
     if (!fullWidth) return button;

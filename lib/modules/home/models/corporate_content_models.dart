@@ -1,48 +1,25 @@
-class SiteCardData {
-  const SiteCardData({
+class CorporateInfoCardData {
+  const CorporateInfoCardData({
     required this.title,
     required this.body,
-    this.kind,
-    this.items = const [],
-    this.note,
-    this.linkLabel,
+    this.accentLabel,
+    this.dark = false,
   });
 
   final String title;
   final String body;
-  final String? kind;
-  final List<(String, String)> items;
-  final String? note;
-  final String? linkLabel;
+  final String? accentLabel;
+  final bool dark;
 }
 
-class SiteScenarioData {
-  const SiteScenarioData({
-    required this.who,
-    required this.title,
-    required this.before,
-    required this.after,
-    this.kind,
+class CorporateMetricData {
+  const CorporateMetricData({
+    required this.value,
+    required this.label,
+    this.dark = false,
   });
 
-  final String who;
-  final String title;
-  final String before;
-  final String after;
-  final String? kind;
-}
-
-class SiteSpecData {
-  const SiteSpecData(this.term, this.value);
-
-  final String term;
   final String value;
-}
-
-class SiteRepoData {
-  const SiteRepoData({required this.name, required this.url, this.note});
-
-  final String name;
-  final String url;
-  final String? note;
+  final String label;
+  final bool dark;
 }

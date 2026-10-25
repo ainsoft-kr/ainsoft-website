@@ -8,9 +8,10 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        ContactHeroSection(),
+        ContactOverviewSection(),
+        ContactChannelsSection(),
         ContactChecklistSection(),
-        ContactTopicsSection(),
+        ContactActionSection(),
       ],
     );
   }

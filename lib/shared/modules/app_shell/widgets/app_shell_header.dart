@@ -22,21 +22,29 @@ class AppShellHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = AppShellResponsive.of(context);
-    // Home is reached through the brand mark; Contact is the CTA button.
     final items = <AppShellNavItem>[
-      const AppShellNavItem(label: '제품', route: RouteManager.productsRoute),
+      const AppShellNavItem(label: 'Home', route: RouteManager.initialRoute),
+      const AppShellNavItem(label: 'About', route: RouteManager.aboutRoute),
       const AppShellNavItem(
-        label: 'AI 구축 서비스',
+        label: 'Products',
+        route: RouteManager.productsRoute,
+      ),
+      const AppShellNavItem(
+        label: 'Solutions',
+        route: RouteManager.solutionsRoute,
+      ),
+      const AppShellNavItem(
+        label: 'Services',
         route: RouteManager.servicesRoute,
       ),
-      const AppShellNavItem(label: '활용 사례', route: RouteManager.solutionsRoute),
-      const AppShellNavItem(label: '회사 소개', route: RouteManager.aboutRoute),
-      const AppShellNavItem(label: '블로그', route: RouteManager.postsRoute),
-    ];
-    final menuItems = <AppShellNavItem>[
-      const AppShellNavItem(label: '홈', route: RouteManager.initialRoute),
-      ...items,
-      const AppShellNavItem(label: '도입 상담', route: RouteManager.contactRoute),
+      const AppShellNavItem(
+        label: 'Post',
+        route: RouteManager.postsRoute,
+      ),
+      const AppShellNavItem(
+        label: 'Contact',
+        route: RouteManager.contactRoute,
+      ),
     ];
 
     return Padding(
@@ -82,26 +90,27 @@ class AppShellHeader extends StatelessWidget {
                       const ContactButton(fullWidth: false),
                     ],
                   )
-                : Row(
+                : Column(
                     children: [
-                      BrandMark(isMobile: responsive.isMobile),
-                      const Spacer(),
-                      ContactButton(
-                        fullWidth: false,
-                        compact: responsive.isMobile,
-                      ),
-                      const SizedBox(width: 4),
-                      PopupMenuButton<String>(
-                        tooltip: '메뉴 열기',
-                        onSelected: (route) => _navigate(context, route),
-                        itemBuilder: (context) => [
-                          for (final item in menuItems)
-                            PopupMenuItem<String>(
-                              value: item.route,
-                              child: Text(item.label),
-                            ),
+                      Row(
+                        children: [
+                          BrandMark(isMobile: responsive.isMobile),
+                          const Spacer(),
+                          PopupMenuButton<String>(
+                            tooltip: 'Open navigation',
+                            onSelected: (route) => _navigate(context, route),
+                            itemBuilder: (context) => [
+                              for (final item in items)
+                                PopupMenuItem<String>(
+                                  value: item.route,
+                                  child: Text(item.label),
+                                ),
+                            ],
+                          ),
                         ],
                       ),
+                      SizedBox(height: responsive.gap),
+                      const ContactButton(fullWidth: true),
                     ],
                   ),
           ),

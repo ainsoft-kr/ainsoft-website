@@ -116,20 +116,20 @@ class FooterLinkBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final links = <({String label, String route})>[
-      (label: '홈', route: RouteManager.initialRoute),
-      (label: '제품', route: RouteManager.productsRoute),
-      (label: 'AI 구축 서비스', route: RouteManager.servicesRoute),
-      (label: '활용 사례', route: RouteManager.solutionsRoute),
-      (label: '회사 소개', route: RouteManager.aboutRoute),
-      (label: '블로그', route: RouteManager.postsRoute),
-      (label: '도입 상담', route: RouteManager.contactRoute),
+      (label: 'Home', route: RouteManager.initialRoute),
+      (label: 'About', route: RouteManager.aboutRoute),
+      (label: 'Products', route: RouteManager.productsRoute),
+      (label: 'Solutions', route: RouteManager.solutionsRoute),
+      (label: 'Services', route: RouteManager.servicesRoute),
+      (label: 'Post', route: RouteManager.postsRoute),
+      (label: 'Contact', route: RouteManager.contactRoute),
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '바로가기',
+          'Quick Links',
           style: GoogleFonts.spaceGrotesk(
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -146,10 +146,7 @@ class FooterLinkBlock extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 onTap: () => _navigate(context, link.route),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 6,
-                    horizontal: 2,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                   child: Text(
                     link.label,
                     style: GoogleFonts.dmSans(

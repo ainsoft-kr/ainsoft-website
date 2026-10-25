@@ -1,29 +1,53 @@
+import '/modules/home/models/corporate_content_models.dart';
+
 class ContactContent {
   ContactContent._();
 
-  static const String email = 'admin@ain.ai.kr';
-  static const String phone = '+82 10-2146-0818';
-  static const String replyPromise = '확인 후 1일 안에 회신드립니다.';
-
-  static const List<(String, String)> checklist = [
-    ('적용하려는 업무', '예: 야간 장애 대응, 반복 티켓 처리, 검사 이미지 판독'),
-    ('현재 환경', '예: 사용 중인 모니터링 · 메신저 도구, 클라우드 또는 온프레미스'),
-    ('희망 일정', '예: 이번 분기 안에 PoC, 내년 상반기 도입'),
+  static const List<CorporateInfoCardData> contactCards = [
+    CorporateInfoCardData(
+      title: '도입 상담',
+      body:
+          'AISOpsFlow, Ainsoft RAG, 또는 두 제품의 조합이 현재 운영 환경에 어떻게 맞을지 함께 검토합니다. 도입 목적과 우선순위만 있어도 상담을 시작할 수 있습니다.',
+      accentLabel: 'Consulting',
+    ),
+    CorporateInfoCardData(
+      title: 'PoC / Demo',
+      body:
+          '제품 구조와 적용 시나리오를 직접 확인할 수 있도록 데모와 PoC 방향을 함께 제안합니다. 운영 자동화와 지식검색의 연결 방식을 실제 흐름 기준으로 설명합니다.',
+      accentLabel: 'Proof of Value',
+    ),
+    CorporateInfoCardData(
+      title: 'Partnership',
+      body:
+          '플러그인 확장, 시스템 통합, 온프레미스 배치처럼 협업이 필요한 주제도 함께 논의할 수 있습니다. 제품 소개를 넘어 실제 적용 구조까지 연결합니다.',
+      accentLabel: 'Collaboration',
+    ),
   ];
 
-  static const List<(String, String)> topics = [
-    ('제품 도입', 'AISOpsFlow, Ainsoft RAG, 또는 두 제품을 함께 쓰는 구성이 우리 환경에 맞는지 검토합니다.'),
-    ('AI 구축', '현장 이미지 · 영상 · 문서 AI나 사내 LLM을 어떤 구조로 만들지 함께 설계합니다.'),
-    ('PoC · 데모', '실제 업무 흐름을 기준으로 데모를 보여드리고 PoC 범위를 정합니다.'),
-    ('협업 · 파트너십', '플러그인 확장, 시스템 통합, 온프레미스 배치 같은 협업을 논의합니다.'),
+  static const List<CorporateInfoCardData> channelCards = [
+    CorporateInfoCardData(
+      title: '운영 자동화가 필요한 경우',
+      body:
+          '알림 이후 승인, 실행, 보고 흐름을 어떻게 표준화할지, 보안 경계를 어떻게 유지할지, 어떤 채널과 도구를 연결할지 중심으로 상담합니다.',
+      dark: true,
+    ),
+    CorporateInfoCardData(
+      title: '지식검색이 필요한 경우',
+      body:
+          '운영 매뉴얼, 정책 문서, 장애 이력을 어떤 구조로 검색 가능하게 만들지, 기존 서비스 안에 어떻게 통합할지 중심으로 상담합니다.',
+      dark: true,
+    ),
+    CorporateInfoCardData(
+      title: '통합 시나리오가 필요한 경우',
+      body:
+          'AISOpsFlow와 Ainsoft RAG를 함께 사용해 운영 코파일럿, 서비스데스크 자동화, 온프레미스 운영 시나리오를 어떻게 설계할지 논의합니다.',
+      dark: true,
+    ),
   ];
 
-  static const String mailSubject = '[도입 상담] 회사명 / 담당자명';
-
-  static String get mailBody => [
-    '안녕하세요, AINSOFT에 도입 상담을 요청합니다.',
-    '',
-    for (final (title, _) in checklist) ...['■ $title:', ''],
-    '■ 연락처:',
-  ].join('\n');
+  static const List<CorporateMetricData> checklistMetrics = [
+    CorporateMetricData(value: 'Use Case', label: '적용하려는 업무 흐름'),
+    CorporateMetricData(value: 'Environment', label: '현재 운영 환경'),
+    CorporateMetricData(value: 'Timeline', label: '희망 일정'),
+  ];
 }
