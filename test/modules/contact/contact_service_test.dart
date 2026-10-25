@@ -33,9 +33,15 @@ void main() {
       expect(sent.url.toString(), 'https://example.test/contact');
       expect(sent.headers['Content-Type'], startsWith('application/json'));
       final body = jsonDecode(sent.body) as Map<String, dynamic>;
+      expect(body['subject'], '도입 상담 - 홍길동 (에이아이엔)');
       expect(body['name'], '홍길동');
-      expect(body['type'], '도입 상담');
-      expect(body['privacyConsent'], true);
+      expect(body['email'], 'hong@example.com');
+      expect(body['fields'], {
+        '문의 유형': '도입 상담',
+        '회사': '에이아이엔',
+        '연락처': '',
+        '개인정보 수집·이용 동의': '동의',
+      });
       expect(body['website'], '');
     });
 

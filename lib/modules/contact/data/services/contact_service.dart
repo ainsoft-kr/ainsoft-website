@@ -18,7 +18,7 @@ class ContactSubmitException implements Exception {
 class ContactService {
   ContactService({
     http.Client? client,
-    this.endpoint = APIConfiguration.contactFormUrl,
+    this.endpoint = APIConfiguration.mailSenderUrl,
   }) : _client = client ?? http.Client();
 
   final http.Client _client;

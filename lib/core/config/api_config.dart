@@ -75,10 +75,11 @@ class APIConfiguration {
   static const String postsUrl = '$baseUrl/posts';
 
   // ────────────────────────────────────────────────
-  // Contact Module URLs
+  // Mail Sender URLs
   // ────────────────────────────────────────────────
 
-  /// 문의하기 폼 제출 엔드포인트 (AWS Lambda Function URL, pulumi-iac `contactFormEndpoint`).
-  static const String contactFormUrl =
-      'https://vrowx2ig4aypne3lxzp5ge3cn40wxdgc.lambda-url.ap-northeast-2.on.aws/';
+  /// 메일 발송 API 엔드포인트 (AWS Lambda Function URL, pulumi-iac `mailSenderEndpoint`).
+  /// 요청 Origin(ain.ai.kr)으로 발신/수신 주소가 정해진다.
+  static const String mailSenderUrl =
+      'https://b5znlah2rtde7jfjwjogarmjg40vwtna.lambda-url.ap-northeast-2.on.aws/';
 }
