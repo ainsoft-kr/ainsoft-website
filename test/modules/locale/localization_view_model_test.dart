@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/locale/controllers/localization_view_model.dart';
 import 'package:getx_starter/modules/locale/data/models/language_model.dart';
 import 'package:getx_starter/modules/locale/data/services/localization_service.dart';
@@ -11,17 +10,14 @@ void main() {
     late LocalizationViewModel viewModel;
 
     setUp(() async {
-      Get.testMode = true;
-
       // Initialize LocalizationService (doesn't require storage)
       LocalizationService.init();
 
-      // Use Get.put to properly initialize the ViewModel and call onInit()
-      viewModel = Get.put(LocalizationViewModel());
+      viewModel = LocalizationViewModel();
     });
 
     tearDown(() {
-      Get.reset();
+      viewModel.dispose();
     });
 
     group('supportedLanguages', () {
@@ -149,14 +145,15 @@ void main() {
     });
 
     group('initialization', () {
-      test('onInit sets up language from saved preferences', () {
+      test('constructor sets up language from saved preferences', () {
         // The ViewModel should initialize with saved or default language
         expect(viewModel.language, isNotNull);
         expect(viewModel.language.code, isNotEmpty);
       });
 
       test('defaults to first supported language if no saved preference', () {
-        final newViewModel = Get.put(LocalizationViewModel(), tag: 'test');
+        final newViewModel = LocalizationViewModel();
+        addTearDown(newViewModel.dispose);
 
         // Should have a valid language set
         expect(newViewModel.language, isNotNull);

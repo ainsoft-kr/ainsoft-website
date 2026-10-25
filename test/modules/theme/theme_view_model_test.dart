@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/theme/controllers/theme_view_model.dart';
 import 'package:getx_starter/modules/theme/data/services/theme_service.dart';
 
@@ -12,13 +11,12 @@ void main() {
     late ThemeService service;
 
     setUp(() {
-      Get.testMode = true;
       service = ThemeService();
-      viewModel = Get.put(ThemeViewModel(service));
+      viewModel = ThemeViewModel(service);
     });
 
     tearDown(() {
-      Get.reset();
+      viewModel.dispose();
     });
 
     group('initialization', () {
@@ -141,13 +139,12 @@ void main() {
       });
     });
 
-    group('test mode behavior', () {
-      test('does not crash when changing theme in test mode', () {
-        // In test mode, Get.changeThemeMode should be skipped
+    group('without storage', () {
+      test('does not crash when storage is not initialized', () {
         expect(() => viewModel.changeTheme(ThemeMode.dark), returnsNormally);
       });
 
-      test('state updates work even in test mode', () {
+      test('state updates work without storage', () {
         viewModel.changeTheme(ThemeMode.dark);
 
         expect(viewModel.themeMode, equals(ThemeMode.dark));

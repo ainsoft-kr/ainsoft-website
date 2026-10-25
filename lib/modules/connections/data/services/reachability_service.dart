@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:get/get_connect/connect.dart';
+import 'package:http/http.dart' as http;
 
 /// Strategy for reachability probing.
 enum ReachabilityStrategy { dnsLookup, httpHead }
@@ -19,7 +19,7 @@ enum ReachabilityStrategy { dnsLookup, httpHead }
 /// - `timeout`: Timeout applied to probes. Defaults to 3 seconds.
 /// - `strategy`: Probe strategy (DNS lookup or HTTP HEAD/GET to a health endpoint). Defaults to DNS.
 /// - `healthEndpoint`: Endpoint used when [strategy] is HTTP-based.
-/// - `http`: Optional GetConnect instance for HTTP probing.
+/// - `client`: Optional HTTP client for probing.
 ///
 /// Returns
 /// - `Future<bool>` indicating whether internet appears reachable.
@@ -32,14 +32,14 @@ class ReachabilityService {
     this.timeout = const Duration(seconds: 3),
     this.strategy = ReachabilityStrategy.dnsLookup,
     this.healthEndpoint,
-    GetConnect? http,
-  }) : _http = http ?? GetConnect();
+    http.Client? client,
+  }) : _client = client ?? http.Client();
 
   final String host;
   final Duration timeout;
   final ReachabilityStrategy strategy;
   final Uri? healthEndpoint;
-  final GetConnect _http;
+  final http.Client _client;
 
   /// Returns true when internet appears reachable.
   Future<bool> isReachable() async {
@@ -60,14 +60,12 @@ class ReachabilityService {
         if (ep == null) return false;
         try {
           // Try HEAD first; some backends may reject it, so we fallback to GET on 405.
-          final resp = await _http
-              .request(ep.toString(), 'HEAD', headers: const {})
-              .timeout(timeout);
-          final code = resp.statusCode ?? 0;
+          final resp = await _client.head(ep).timeout(timeout);
+          final code = resp.statusCode;
           if (code >= 200 && code < 300) return true;
           if (code == 405) {
-            final getResp = await _http.get(ep.toString()).timeout(timeout);
-            final getCode = getResp.statusCode ?? 0;
+            final getResp = await _client.get(ep).timeout(timeout);
+            final getCode = getResp.statusCode;
             return getCode >= 200 && getCode < 300;
           }
           return false;

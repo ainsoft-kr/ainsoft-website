@@ -24,7 +24,7 @@ final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
   ),
   scaffoldBackgroundColor: const Color(0xFFF4F0E8),
-  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.light().textTheme).apply(
+  textTheme: _dmSansTextTheme(ThemeData.light().textTheme).apply(
     fontFamilyFallback: appFontFallback,
   ),
   appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
@@ -50,13 +50,39 @@ final ThemeData darkTheme = ThemeData(
     seedColor: const Color(0xFFC66B3D),
     brightness: Brightness.dark,
   ),
-  textTheme: GoogleFonts.dmSansTextTheme(ThemeData.dark().textTheme).apply(
+  textTheme: _dmSansTextTheme(ThemeData.dark().textTheme).apply(
     fontFamilyFallback: appFontFallback,
   ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
   ),
 );
+
+/// Applies DM Sans to every style of [base].
+///
+/// google_fonts 9 builds its `TextTheme` helpers on the `material_ui` package,
+/// whose `TextTheme` is a different type from Flutter's, so the per-style
+/// `GoogleFonts.dmSans` call is used instead.
+TextTheme _dmSansTextTheme(TextTheme base) {
+  TextStyle? dmSans(TextStyle? style) => GoogleFonts.dmSans(textStyle: style);
+  return base.copyWith(
+    displayLarge: dmSans(base.displayLarge),
+    displayMedium: dmSans(base.displayMedium),
+    displaySmall: dmSans(base.displaySmall),
+    headlineLarge: dmSans(base.headlineLarge),
+    headlineMedium: dmSans(base.headlineMedium),
+    headlineSmall: dmSans(base.headlineSmall),
+    titleLarge: dmSans(base.titleLarge),
+    titleMedium: dmSans(base.titleMedium),
+    titleSmall: dmSans(base.titleSmall),
+    bodyLarge: dmSans(base.bodyLarge),
+    bodyMedium: dmSans(base.bodyMedium),
+    bodySmall: dmSans(base.bodySmall),
+    labelLarge: dmSans(base.labelLarge),
+    labelMedium: dmSans(base.labelMedium),
+    labelSmall: dmSans(base.labelSmall),
+  );
+}
 
 /// Legacy export for backwards compatibility
 @Deprecated('Use lightTheme instead')

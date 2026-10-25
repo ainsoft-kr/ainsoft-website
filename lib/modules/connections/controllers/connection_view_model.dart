@@ -133,6 +133,7 @@ class ConnectionViewModel extends ChangeNotifier with WidgetsBindingObserver {
       case ConnectivityResult.ethernet:
       case ConnectivityResult.bluetooth:
       case ConnectivityResult.vpn:
+      case ConnectivityResult.satellite:
       case ConnectivityResult.other:
         _setConnectionType(ConnectivityType.connecting);
         await _checkInternetConnection();
