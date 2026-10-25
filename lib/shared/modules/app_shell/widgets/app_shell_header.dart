@@ -41,10 +41,6 @@ class AppShellHeader extends StatelessWidget {
         label: 'Post',
         route: RouteManager.postsRoute,
       ),
-      const AppShellNavItem(
-        label: 'Contact',
-        route: RouteManager.contactRoute,
-      ),
     ];
 
     return Padding(
