@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:getx_starter/modules/locale/data/models/language_model.dart';
+import 'package:ainsoft_website/modules/locale/data/models/language_model.dart';
 
 void main() {
   group('LanguageModel', () {

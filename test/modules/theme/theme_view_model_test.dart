@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:getx_starter/modules/theme/controllers/theme_view_model.dart';
-import 'package:getx_starter/modules/theme/data/services/theme_service.dart';
+import 'package:ainsoft_website/modules/theme/controllers/theme_view_model.dart';
+import 'package:ainsoft_website/modules/theme/data/services/theme_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:getx_starter/modules/contact/data/models/contact_inquiry.dart';
-import 'package:getx_starter/modules/contact/data/services/contact_service.dart';
+import 'package:ainsoft_website/modules/contact/data/models/contact_inquiry.dart';
+import 'package:ainsoft_website/modules/contact/data/services/contact_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 

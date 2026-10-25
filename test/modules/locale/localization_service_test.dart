@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:getx_starter/modules/locale/data/services/localization_service.dart';
+import 'package:ainsoft_website/modules/locale/data/services/localization_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

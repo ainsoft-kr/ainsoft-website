@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:getx_starter/modules/connections/controllers/connection_view_model.dart';
+import 'package:ainsoft_website/modules/connections/controllers/connection_view_model.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
