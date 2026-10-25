@@ -73,4 +73,12 @@ class APIConfiguration {
   /// This is a demonstration endpoint using a free public API.
   /// Replace with your own posts endpoint when adapting this template.
   static const String postsUrl = '$baseUrl/posts';
+
+  // ────────────────────────────────────────────────
+  // Contact Module URLs
+  // ────────────────────────────────────────────────
+
+  /// 문의하기 폼 제출 엔드포인트 (AWS Lambda Function URL, pulumi-iac `contactFormEndpoint`).
+  static const String contactFormUrl =
+      'https://vrowx2ig4aypne3lxzp5ge3cn40wxdgc.lambda-url.ap-northeast-2.on.aws/';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/contact_form_section.dart';
 import 'widgets/contact_sections.dart';
 
 class ContactPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class ContactPage extends StatelessWidget {
         ContactOverviewSection(),
         ContactChannelsSection(),
         ContactChecklistSection(),
+        ContactFormSection(),
         ContactActionSection(),
       ],
     );

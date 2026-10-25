@@ -50,4 +50,15 @@ class ContactContent {
     CorporateMetricData(value: 'Environment', label: '현재 운영 환경'),
     CorporateMetricData(value: 'Timeline', label: '희망 일정'),
   ];
+
+  /// 문의 유형 (서버의 INQUIRY_TYPES와 동일해야 함)
+  static const List<String> inquiryTypes = [
+    '도입 상담',
+    'PoC / Demo',
+    'Partnership',
+    '기타',
+  ];
+
+  static const String privacyNotice =
+      '수집 항목: 이름, 회사명, 이메일, 연락처, 문의 내용 · 이용 목적: 문의 확인 및 답변 · 보유 기간: 문의 처리 완료 후 1년';
 }
