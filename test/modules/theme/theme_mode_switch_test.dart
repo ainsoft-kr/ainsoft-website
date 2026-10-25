@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/theme/controllers/theme_view_model.dart';
 import 'package:getx_starter/modules/theme/data/services/theme_service.dart';
 import 'package:getx_starter/modules/theme/views/theme_mode_switch.dart';
+
+import '../../helpers/modular_test_helper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -13,23 +14,17 @@ void main() {
     late ThemeViewModel viewModel;
 
     setUp(() {
-      Get.testMode = true;
-
       // Create and register ViewModel
       viewModel = ThemeViewModel(ThemeService());
-      Get.put<ThemeViewModel>(viewModel);
+      bindTestModule((i) => i.addInstance<ThemeViewModel>(viewModel));
     });
 
     tearDown(() {
-      Get.reset();
+      unbindTestModule();
     });
 
     Widget createTestWidget() {
-      return GetMaterialApp(
-        home: Scaffold(
-          body: ThemeModeSwitch(),
-        ),
-      );
+      return MaterialApp(home: Scaffold(body: ThemeModeSwitch()));
     }
 
     testWidgets('renders without errors', (WidgetTester tester) async {
@@ -72,7 +67,9 @@ void main() {
       expect(switchWidget.value, isTrue);
     });
 
-    testWidgets('tapping switch changes theme to dark', (WidgetTester tester) async {
+    testWidgets('tapping switch changes theme to dark', (
+      WidgetTester tester,
+    ) async {
       viewModel.changeTheme(ThemeMode.light);
 
       await tester.pumpWidget(createTestWidget());
@@ -87,7 +84,9 @@ void main() {
       expect(viewModel.isDark, isTrue);
     });
 
-    testWidgets('tapping switch changes theme to light', (WidgetTester tester) async {
+    testWidgets('tapping switch changes theme to light', (
+      WidgetTester tester,
+    ) async {
       viewModel.changeTheme(ThemeMode.dark);
 
       await tester.pumpWidget(createTestWidget());
@@ -102,7 +101,9 @@ void main() {
       expect(viewModel.isDark, isFalse);
     });
 
-    testWidgets('switch updates when theme changes externally', (WidgetTester tester) async {
+    testWidgets('switch updates when theme changes externally', (
+      WidgetTester tester,
+    ) async {
       viewModel.changeTheme(ThemeMode.light);
 
       await tester.pumpWidget(createTestWidget());
@@ -145,11 +146,12 @@ void main() {
       expect(viewModel.isDark, isTrue);
     });
 
-    testWidgets('uses GetWidget controller binding', (WidgetTester tester) async {
+    testWidgets('resolves its controller through Modular', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      // Widget should render without calling Get.find multiple times
       expect(find.byType(ThemeModeSwitch), findsOneWidget);
     });
 

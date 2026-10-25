@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/theme/controllers/theme_view_model.dart';
 import 'package:getx_starter/modules/theme/data/services/theme_service.dart';
 import 'package:getx_starter/modules/theme/views/theme_drawer_item.dart';
 import 'package:getx_starter/modules/theme/views/theme_mode_label.dart';
 import 'package:getx_starter/modules/theme/views/theme_mode_switch.dart';
 import 'package:getx_starter/modules/locale/data/services/localization_service.dart';
+
+import '../../helpers/modular_test_helper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -16,28 +17,22 @@ void main() {
     late ThemeViewModel viewModel;
 
     setUp(() {
-      Get.testMode = true;
-
       // Initialize localization for translations
       LocalizationService.init();
 
       // Create and register ViewModel
       viewModel = ThemeViewModel(ThemeService());
-      Get.put<ThemeViewModel>(viewModel);
+      bindTestModule((i) => i.addInstance<ThemeViewModel>(viewModel));
     });
 
     tearDown(() {
-      Get.reset();
+      unbindTestModule();
     });
 
     Widget createTestWidget() {
-      return GetMaterialApp(
-        translations: LocalizationService(),
+      return MaterialApp(
         locale: LocalizationService.locale,
-        fallbackLocale: LocalizationService.fallbackLocale,
-        home: Scaffold(
-          body: ThemeDrawerItem(),
-        ),
+        home: Scaffold(body: ThemeDrawerItem()),
       );
     }
 
@@ -82,13 +77,21 @@ void main() {
 
       // Should show either English or Arabic dark mode text
       expect(
-        find.textContaining('Dark mode', findRichText: true).evaluate().isNotEmpty ||
-        find.textContaining('الوضع الداكن', findRichText: true).evaluate().isNotEmpty,
+        find
+                .textContaining('Dark mode', findRichText: true)
+                .evaluate()
+                .isNotEmpty ||
+            find
+                .textContaining('الوضع الداكن', findRichText: true)
+                .evaluate()
+                .isNotEmpty,
         isTrue,
       );
     });
 
-    testWidgets('has correct structure - icon, label, switch', (WidgetTester tester) async {
+    testWidgets('has correct structure - icon, label, switch', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
@@ -104,7 +107,9 @@ void main() {
       expect(listTile.trailing, isA<ThemeModeSwitch>());
     });
 
-    testWidgets('switch is functional within drawer item', (WidgetTester tester) async {
+    testWidgets('switch is functional within drawer item', (
+      WidgetTester tester,
+    ) async {
       viewModel.changeTheme(ThemeMode.light);
 
       await tester.pumpWidget(createTestWidget());
@@ -122,17 +127,11 @@ void main() {
 
     testWidgets('works in a drawer context', (WidgetTester tester) async {
       await tester.pumpWidget(
-        GetMaterialApp(
-          translations: LocalizationService(),
+        MaterialApp(
           locale: LocalizationService.locale,
-          fallbackLocale: LocalizationService.fallbackLocale,
           home: Scaffold(
             drawer: Drawer(
-              child: ListView(
-                children: const [
-                  ThemeDrawerItem(),
-                ],
-              ),
+              child: ListView(children: const [ThemeDrawerItem()]),
             ),
             appBar: AppBar(
               title: const Text('Test'),

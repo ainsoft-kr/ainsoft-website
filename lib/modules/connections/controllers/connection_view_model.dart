@@ -158,6 +158,10 @@ class ConnectionViewModel extends ChangeNotifier with WidgetsBindingObserver {
     _onLostConnection();
   }
 
+  /// Lets tests drive the state without platform connectivity plugins.
+  @visibleForTesting
+  set debugConnectionType(ConnectivityType value) => _setConnectionType(value);
+
   void _setConnectionType(ConnectivityType value) {
     if (_connectionType == value) return;
     _connectionType = value;

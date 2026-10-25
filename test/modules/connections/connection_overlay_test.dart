@@ -1,43 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
-import 'package:getx_starter/modules/connections/views/connection_overlay.dart';
 import 'package:getx_starter/modules/connections/controllers/connection_view_model.dart';
+import 'package:getx_starter/modules/connections/views/connection_overlay.dart';
+
+import '../../helpers/modular_test_helper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('ConnectionOverlay', () {
+    late ConnectionViewModel vm;
+
     setUp(() {
-      // Provide a ConnectionViewModel without auto init to avoid platform calls in tests.
-      Get.put(ConnectionViewModel(autoInit: false));
+      // autoInit: false avoids platform connectivity calls in tests.
+      vm = ConnectionViewModel(autoInit: false);
+      bindTestModule((i) => i.addInstance<ConnectionViewModel>(vm));
     });
 
-    tearDown(() async {
-      await Get.delete<ConnectionViewModel>(force: true);
+    tearDown(unbindTestModule);
+
+    Widget buildApp() => const MaterialApp(
+      home: Scaffold(body: ConnectionOverlay(child: SizedBox.shrink())),
+    );
+
+    testWidgets('shows a banner while reconnecting', (tester) async {
+      await tester.pumpWidget(buildApp());
+
+      expect(find.text('Reconnecting...'), findsOneWidget);
     });
 
-    Widget buildApp(Widget child) => GetMaterialApp(home: Scaffold(body: child));
+    testWidgets('shows the offline card when there is no internet', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildApp());
 
-    testWidgets('shows InfoItem when connecting, offline card when no internet, and nothing when connected', (tester) async {
-      final vm = Get.find<ConnectionViewModel>();
-
-      // Start with connecting
-      vm.connectionType.value = ConnectivityType.connecting;
-      await tester.pumpWidget(buildApp(const ConnectionOverlay(child: SizedBox.shrink())));
+      vm.debugConnectionType = ConnectivityType.noInternet;
       await tester.pump();
-      expect(find.textContaining('trying to reconnect'), findsOneWidget);
 
-      // Switch to no internet
-      vm.connectionType.value = ConnectivityType.noInternet;
-      await tester.pump();
-      expect(find.text('CONNECTION LOST'), findsOneWidget);
+      expect(find.text('Connection lost'), findsOneWidget);
+      expect(find.text('Retry'), findsOneWidget);
+    });
 
-      // Switch to connected
-      vm.connectionType.value = ConnectivityType.wifi;
+    testWidgets('shows nothing once connected', (tester) async {
+      await tester.pumpWidget(buildApp());
+
+      vm.debugConnectionType = ConnectivityType.wifi;
       await tester.pump();
-      expect(find.text('CONNECTION LOST'), findsNothing);
-      expect(find.textContaining('trying to reconnect'), findsNothing);
+
+      expect(find.text('Connection lost'), findsNothing);
+      expect(find.text('Reconnecting...'), findsNothing);
     });
   });
 }

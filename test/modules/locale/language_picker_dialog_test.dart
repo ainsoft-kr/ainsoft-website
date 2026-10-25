@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/locale/controllers/localization_view_model.dart';
 import 'package:getx_starter/modules/locale/data/models/language_model.dart';
 import 'package:getx_starter/modules/locale/views/language_dialog.dart';
 import 'package:getx_starter/modules/locale/data/services/localization_service.dart';
+
+import '../../helpers/modular_test_helper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -13,28 +14,22 @@ void main() {
     late LocalizationViewModel viewModel;
 
     setUp(() async {
-      Get.testMode = true;
-
       // Initialize localization (doesn't require storage)
       LocalizationService.init();
 
       // Create and register ViewModel
       viewModel = LocalizationViewModel();
-      Get.put<LocalizationViewModel>(viewModel);
+      bindTestModule((i) => i.addInstance<LocalizationViewModel>(viewModel));
     });
 
     tearDown(() {
-      Get.reset();
+      unbindTestModule();
     });
 
     Widget createTestWidget() {
-      return GetMaterialApp(
-        translations: LocalizationService(),
+      return MaterialApp(
         locale: LocalizationService.locale,
-        fallbackLocale: LocalizationService.fallbackLocale,
-        home: Scaffold(
-          body: LanguagePickerDialog(),
-        ),
+        home: Scaffold(body: LanguagePickerDialog()),
       );
     }
 
@@ -63,7 +58,10 @@ void main() {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      expect(find.byType(DropdownButtonFormField<LanguageModel>), findsOneWidget);
+      expect(
+        find.byType(DropdownButtonFormField<LanguageModel>),
+        findsOneWidget,
+      );
     });
 
     testWidgets('displays confirm button', (WidgetTester tester) async {
@@ -74,7 +72,9 @@ void main() {
       expect(find.text('Confirm'), findsOneWidget);
     });
 
-    testWidgets('dropdown shows all supported languages', (WidgetTester tester) async {
+    testWidgets('dropdown shows all supported languages', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
@@ -89,7 +89,9 @@ void main() {
       expect(find.text('العربية'), findsWidgets);
     });
 
-    testWidgets('displays initial selected language', (WidgetTester tester) async {
+    testWidgets('displays initial selected language', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
@@ -98,10 +100,13 @@ void main() {
       expect(find.text(currentLang.name), findsWidgets);
     });
 
-    testWidgets('selecting language updates ViewModel', (WidgetTester tester) async {
+    testWidgets('selecting language updates ViewModel', (
+      WidgetTester tester,
+    ) async {
       // Set initial language to English
-      final english = LocalizationViewModel.supportedLanguages
-          .firstWhere((lang) => lang.code == 'en');
+      final english = LocalizationViewModel.supportedLanguages.firstWhere(
+        (lang) => lang.code == 'en',
+      );
       await viewModel.selectLanguage(english);
 
       await tester.pumpWidget(createTestWidget());
@@ -119,7 +124,9 @@ void main() {
       expect(viewModel.language.code, equals('ar'));
     });
 
-    testWidgets('confirm button saves language change', (WidgetTester tester) async {
+    testWidgets('confirm button saves language change', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
@@ -135,13 +142,14 @@ void main() {
       await tester.pumpAndSettle();
 
       // Dialog should be closed (back navigation triggered)
-      // In a real app, Get.back() would close the dialog
+      // In a real app, RouteManager.back() would close the dialog
     });
 
     testWidgets('close button dismisses changes', (WidgetTester tester) async {
       // Set initial language to English
-      final english = LocalizationViewModel.supportedLanguages
-          .firstWhere((lang) => lang.code == 'en');
+      final english = LocalizationViewModel.supportedLanguages.firstWhere(
+        (lang) => lang.code == 'en',
+      );
       await viewModel.selectLanguage(english);
 
       await tester.pumpWidget(createTestWidget());
@@ -159,16 +167,15 @@ void main() {
       await tester.pumpAndSettle();
 
       // Language should be reverted (dismiss called)
-      // Note: In real app, Get.back() would close dialog
+      // Note: In real app, RouteManager.back() would close dialog
     });
 
-    testWidgets('uses controller property instead of Get.find', (WidgetTester tester) async {
-      // This test verifies the fix for tight coupling
-      // The widget should access controller via GetView inheritance
+    testWidgets('resolves its controller through Modular', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      // Widget should render without calling Get.find multiple times
       expect(find.byType(LanguagePickerDialog), findsOneWidget);
     });
 

@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:getx_starter/modules/locale/data/services/localization_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('LocalizationService', () {
-    setUp(() {
-      // Initialize GetX for testing
-      Get.testMode = true;
+    tearDown(() => LocalizationService.changeLocale('en'));
+
+    group('tr', () {
+      test('returns the English string for a known key', () {
+        LocalizationService.changeLocale('en');
+        expect(LocalizationService.tr('buttons.confirm'), 'Confirm');
+      });
+
+      test('returns the key itself when it is unknown', () {
+        expect(LocalizationService.tr('no.such.key'), 'no.such.key');
+      });
     });
 
-    tearDown(() {
-      Get.reset();
+    group('supportedLocales', () {
+      test('lists every translation table', () {
+        expect(
+          LocalizationService.supportedLocales.map((l) => l.languageCode),
+          containsAll(['en', 'ar']),
+        );
+      });
     });
 
     group('savedLanguageCode', () {
@@ -26,7 +38,7 @@ void main() {
       test('validates saved code against supported languages', () {
         // The service should validate against supported translations
         final code = LocalizationService.savedLanguageCode;
-        final supportedCodes = LocalizationService().keys.keys;
+        final supportedCodes = LocalizationService.translations.keys;
         expect(supportedCodes.contains(code), isTrue);
       });
     });
@@ -39,48 +51,52 @@ void main() {
 
     group('keys', () {
       test('contains English translations', () {
-        final service = LocalizationService();
-        expect(service.keys.containsKey('en'), isTrue);
+        expect(LocalizationService.translations.containsKey('en'), isTrue);
       });
 
       test('contains Arabic translations', () {
-        final service = LocalizationService();
-        expect(service.keys.containsKey('ar'), isTrue);
+        expect(LocalizationService.translations.containsKey('ar'), isTrue);
       });
 
       test('English translations are not empty', () {
-        final service = LocalizationService();
-        final enTranslations = service.keys['en'];
+        final enTranslations = LocalizationService.translations['en'];
         expect(enTranslations, isNotNull);
         expect(enTranslations!.isNotEmpty, isTrue);
       });
 
       test('Arabic translations are not empty', () {
-        final service = LocalizationService();
-        final arTranslations = service.keys['ar'];
+        final arTranslations = LocalizationService.translations['ar'];
         expect(arTranslations, isNotNull);
         expect(arTranslations!.isNotEmpty, isTrue);
       });
 
       test('both languages have same keys', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!.keys.toSet();
-        final arKeys = service.keys['ar']!.keys.toSet();
+        final enKeys = LocalizationService.translations['en']!.keys.toSet();
+        final arKeys = LocalizationService.translations['ar']!.keys.toSet();
 
         // Check if all English keys exist in Arabic
-        expect(arKeys.containsAll(enKeys), isTrue,
-            reason: 'Arabic translations should contain all English keys');
+        expect(
+          arKeys.containsAll(enKeys),
+          isTrue,
+          reason: 'Arabic translations should contain all English keys',
+        );
 
         // Check if all Arabic keys exist in English
-        expect(enKeys.containsAll(arKeys), isTrue,
-            reason: 'English translations should contain all Arabic keys');
+        expect(
+          enKeys.containsAll(arKeys),
+          isTrue,
+          reason: 'English translations should contain all Arabic keys',
+        );
       });
     });
 
     group('changeLocale', () {
       test('ignores invalid language codes', () {
         // Should not throw when given invalid code
-        expect(() => LocalizationService.changeLocale('invalid'), returnsNormally);
+        expect(
+          () => LocalizationService.changeLocale('invalid'),
+          returnsNormally,
+        );
       });
 
       test('accepts valid language codes', () {
@@ -103,14 +119,18 @@ void main() {
 
     group('Translation keys', () {
       test('app name key exists in both languages', () {
-        final service = LocalizationService();
-        expect(service.keys['en']!.containsKey('app.name'), isTrue);
-        expect(service.keys['ar']!.containsKey('app.name'), isTrue);
+        expect(
+          LocalizationService.translations['en']!.containsKey('app.name'),
+          isTrue,
+        );
+        expect(
+          LocalizationService.translations['ar']!.containsKey('app.name'),
+          isTrue,
+        );
       });
 
       test('auth input keys exist', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!;
+        final enKeys = LocalizationService.translations['en']!;
 
         expect(enKeys.containsKey('auth.inputs.username'), isTrue);
         expect(enKeys.containsKey('auth.inputs.email'), isTrue);
@@ -119,8 +139,7 @@ void main() {
       });
 
       test('validation message keys exist', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!;
+        final enKeys = LocalizationService.translations['en']!;
 
         expect(enKeys.containsKey('validations.email.empty'), isTrue);
         expect(enKeys.containsKey('validations.email.notValid'), isTrue);
@@ -128,8 +147,7 @@ void main() {
       });
 
       test('error message keys exist', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!;
+        final enKeys = LocalizationService.translations['en']!;
 
         expect(enKeys.containsKey('errors.generic'), isTrue);
         expect(enKeys.containsKey('errors.network'), isTrue);
@@ -137,8 +155,7 @@ void main() {
       });
 
       test('page title keys exist', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!;
+        final enKeys = LocalizationService.translations['en']!;
 
         expect(enKeys.containsKey('pages.home.title'), isTrue);
         expect(enKeys.containsKey('pages.login.title'), isTrue);
@@ -146,8 +163,7 @@ void main() {
       });
 
       test('button label keys exist', () {
-        final service = LocalizationService();
-        final enKeys = service.keys['en']!;
+        final enKeys = LocalizationService.translations['en']!;
 
         expect(enKeys.containsKey('buttons.confirm'), isTrue);
         expect(enKeys.containsKey('buttons.login'), isTrue);
