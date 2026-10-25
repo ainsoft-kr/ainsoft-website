@@ -1,42 +1,151 @@
 import 'package:flutter/material.dart';
-import '/core/routing/route_manager.dart';
 import '/modules/contact/controllers/contact_view_model.dart';
-import '/modules/home/models/corporate_content_models.dart';
-import '/modules/home/widgets/corporate_page_components.dart';
+import '/modules/home/widgets/corporate_responsive.dart';
+import '/modules/home/widgets/site_components.dart';
 
-class ContactOverviewSection extends StatelessWidget {
-  const ContactOverviewSection({super.key});
+class ContactHeroSection extends StatelessWidget {
+  const ContactHeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = ContactViewModel();
+    final responsive = CorporateResponsive.of(context);
 
-    return CorporatePageSection(
-      label: 'Contact',
-      title: '도입 상담, PoC, 협업 제안을 바로 시작할 수 있습니다.',
-      description:
-          '운영 자동화, 지식검색, 또는 두 제품의 조합이 필요한 경우 현재 상황과 목표를 기준으로 가장 적합한 방향을 함께 정리합니다.',
-      child: _InfoCards(cards: controller.contactCards),
+    final mailButton = FilledButton.icon(
+      onPressed: () => openExternalUrl(controller.mailtoUrl),
+      icon: const Icon(Icons.mail_outline_rounded, size: 20),
+      label: const Text('메일로 상담 신청'),
+      style: FilledButton.styleFrom(
+        backgroundColor: SiteColors.accent,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        textStyle: siteText(fontSize: 16, fontWeight: FontWeight.w700),
+      ),
+    );
+
+    return SiteBand(
+      verticalPadding: responsive.isMobile
+          ? 48
+          : responsive.isTablet
+          ? 72
+          : 96,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '도입 상담',
+            style: siteText(
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: SiteColors.muted,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Semantics(
+            header: true,
+            child: Text(
+              '지금 가장 반복되는 업무\n하나만 알려주세요.',
+              style: siteText(
+                fontSize: responsive.isMobile
+                    ? 28
+                    : responsive.isTablet
+                    ? 38
+                    : 48,
+                fontWeight: FontWeight.w800,
+                height: 1.22,
+                letterSpacing: -0.6,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 640),
+            child: Text(
+              '메일 한 통이면 상담이 시작됩니다. 아래 버튼을 누르면 적어 주실 항목이 채워진 메일이 열립니다.',
+              style: siteText(
+                fontSize: responsive.isMobile ? 17 : 19,
+                height: 1.6,
+                color: SiteColors.ink2,
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+          if (responsive.isMobile)
+            SizedBox(width: double.infinity, child: mailButton)
+          else
+            mailButton,
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              const Icon(
+                Icons.schedule_rounded,
+                size: 18,
+                color: SiteColors.ink2,
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  controller.replyPromise,
+                  style: siteText(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: SiteColors.ink2,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 28),
+          Wrap(
+            spacing: 28,
+            runSpacing: 12,
+            children: [
+              _ContactLine(
+                icon: Icons.alternate_email_rounded,
+                label: controller.email,
+                onTap: () => openExternalUrl('mailto:${controller.email}'),
+              ),
+              _ContactLine(
+                icon: Icons.phone_outlined,
+                label: controller.phone,
+                onTap: () => openExternalUrl(controller.telUrl),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
-class ContactChannelsSection extends StatelessWidget {
-  const ContactChannelsSection({super.key});
+class _ContactLine extends StatelessWidget {
+  const _ContactLine({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final controller = ContactViewModel();
-
-    return CorporatePageSection(
-      label: 'Channels',
-      title: '이런 주제로 상담을 많이 시작합니다.',
-      description:
-          '운영 자동화, 지식검색, 통합 시나리오 중 어디에서부터 시작할지 정하면 더 빠르게 필요한 제품과 구조를 제안할 수 있습니다.',
-      dark: true,
-      actionLabel: 'About 보기',
-      actionRoute: RouteManager.aboutRoute,
-      child: _InfoCards(cards: controller.channelCards),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(6),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 18, color: SiteColors.muted),
+            const SizedBox(width: 8),
+            Text(label, style: siteText(fontSize: 15, color: SiteColors.ink2)),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -48,70 +157,52 @@ class ContactChecklistSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = ContactViewModel();
 
-    return CorporatePageSection(
-      label: 'Checklist',
-      title: '이 세 가지만 정리되면 상담이 더 빨라집니다.',
-      description:
-          '적용하려는 업무 흐름, 현재 운영 환경, 희망 일정을 알려주시면 제품 구성과 도입 방향을 더 구체적으로 제안할 수 있습니다.',
-      child: _MetricCards(metrics: controller.checklistMetrics),
-    );
-  }
-}
-
-class ContactActionSection extends StatelessWidget {
-  const ContactActionSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CorporateActionBanner(
-      title: 'AINSOFT와 함께 운영 자동화와 지식검색 전략을 설계해보세요.',
-      description:
-          '제품 소개부터 PoC 방향, 통합 시나리오까지 현재 환경에 맞는 현실적인 도입 방안을 함께 제안합니다.',
-      primaryLabel: '홈으로 이동',
-      primaryRoute: RouteManager.initialRoute,
-      secondaryLabel: 'Products 보기',
-      secondaryRoute: RouteManager.productsRoute,
-    );
-  }
-}
-
-class _InfoCards extends StatelessWidget {
-  const _InfoCards({required this.cards});
-
-  final List<CorporateInfoCardData> cards;
-
-  @override
-  Widget build(BuildContext context) {
-    return CorporateResponsiveWrap(
-      children: [
-        for (final card in cards)
-          CorporateInfoCard(
-            title: card.title,
-            body: card.body,
-            accentLabel: card.accentLabel,
-            dark: card.dark,
+    return SiteBand(
+      color: SiteColors.surface,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SiteSectionHeading(
+            title: '이 세 가지를 적어 주시면 더 빨라집니다',
+            subtitle: '정확하지 않아도 괜찮습니다. 대략적인 내용만으로도 상담을 시작할 수 있습니다.',
           ),
-      ],
+          SiteColumns(
+            children: [
+              for (var i = 0; i < controller.checklist.length; i++)
+                SiteTextItem(
+                  tag: '${i + 1}',
+                  title: controller.checklist[i].$1,
+                  body: controller.checklist[i].$2,
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _MetricCards extends StatelessWidget {
-  const _MetricCards({required this.metrics});
-
-  final List<CorporateMetricData> metrics;
+class ContactTopicsSection extends StatelessWidget {
+  const ContactTopicsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CorporateResponsiveWrap(
-      children: [
-        for (final metric in metrics)
-          CorporateMetricCard(
-            value: metric.value,
-            label: metric.label,
-            dark: metric.dark,
+    final controller = ContactViewModel();
+
+    return SiteBand(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SiteSectionHeading(title: '이런 이야기를 나눕니다'),
+          SiteColumns(
+            columns: 2,
+            children: [
+              for (final (title, body) in controller.topics)
+                SiteTextItem(title: title, body: body),
+            ],
           ),
-      ],
+        ],
+      ),
     );
   }
 }

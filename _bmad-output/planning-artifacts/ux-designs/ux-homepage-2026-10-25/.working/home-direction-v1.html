@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AINSOFT 홈 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F2A2B;
+    --ink-2: #224142;
+    --muted: #536D6D;
+    --cream: #F7F2EA;
+    --sand: #EFE6D8;
+    --surface: #FFFFFF;
+    --accent: #C86E42;
+    --line: rgba(15, 42, 43, 0.10);
+    --on-ink: #F7F2EA;
+    --on-ink-muted: #BFD0C8;
+    --note-bg: #FFF4C2;
+    --note-ink: #5A4A00;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Noto Sans KR", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+  /* review toolbar */
+  .toolbar {
+    position: sticky; top: 0; z-index: 20;
+    background: #1d1d1d; color: #eee; font-size: 13px;
+  }
+  .toolbar .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-top: 8px; padding-bottom: 8px; }
+  .toolbar b { color: #fff; }
+  .toolbar button {
+    font: inherit; border: 1px solid #555; background: #2b2b2b; color: #eee;
+    padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .toolbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .toolbar .grp { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+
+  /* design notes */
+  .note {
+    display: none;
+    background: var(--note-bg); color: var(--note-ink);
+    border-left: 4px solid #E0B800;
+    font-size: 13px; line-height: 1.5;
+    padding: 8px 12px; border-radius: 6px; margin: 0 0 20px;
+  }
+  body.show-notes .note { display: block; }
+
+  /* header */
+  header.site { background: var(--cream); border-bottom: 1px solid var(--line); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .logo { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 20px; letter-spacing: .5px; }
+  nav.main { display: none; gap: 28px; font-size: 15px; font-weight: 500; color: var(--ink-2); }
+  nav.main a { text-decoration: none; }
+  @media (min-width: 900px) { nav.main { display: flex; } }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font: inherit; font-weight: 700; text-decoration: none;
+    border-radius: 10px; padding: 14px 22px; border: 0; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-sm { padding: 9px 16px; font-size: 14px; }
+  .link-arrow { font-weight: 700; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
+
+  /* hero */
+  .hero { padding: 72px 0 80px; }
+  @media (min-width: 900px) { .hero { padding: 112px 0 120px; } }
+  .eyebrow { font-size: 14px; font-weight: 700; color: var(--muted); margin: 0 0 16px; }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 60px); line-height: 1.18; letter-spacing: -0.02em;
+    font-weight: 800; margin: 0 0 24px; max-width: 16em; word-break: keep-all;
+  }
+  .hero p.lead { font-size: clamp(17px, 2vw, 20px); color: var(--ink-2); max-width: 34em; margin: 0 0 36px; word-break: keep-all; }
+  .hero .lead strong { color: var(--ink); }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+
+  section { padding: 72px 0; }
+  @media (min-width: 900px) { section { padding: 104px 0; } }
+  h2 {
+    font-size: clamp(26px, 3.6vw, 38px); line-height: 1.25; letter-spacing: -0.015em;
+    font-weight: 800; margin: 0 0 16px; word-break: keep-all;
+  }
+  .sub { color: var(--muted); font-size: 17px; max-width: 36em; margin: 0 0 40px; word-break: keep-all; }
+
+  /* offerings */
+  .offer { background: var(--surface); }
+  .offer-grid { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .offer-grid { grid-template-columns: 1.4fr 1fr; } }
+  .offer-card { border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .offer-card.primary { background: var(--ink); color: var(--on-ink); border: 0; }
+  .offer-card .kind { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+  .offer-card.primary .kind { color: var(--on-ink-muted); }
+  .offer-card h3 { font-size: 24px; margin: 0 0 10px; line-height: 1.3; word-break: keep-all; }
+  .offer-card p { margin: 0 0 20px; color: var(--muted); word-break: keep-all; }
+  .offer-card.primary p { color: var(--on-ink-muted); }
+  .pair { display: grid; gap: 12px; margin-bottom: 20px; }
+  @media (min-width: 600px) { .pair { grid-template-columns: 1fr 1fr; } }
+  .pair div { background: rgba(255,255,255,.08); border-radius: 12px; padding: 16px; }
+  .pair b { display: block; font-family: "Space Grotesk", sans-serif; font-size: 18px; }
+  .pair span { font-size: 14px; color: var(--on-ink-muted); }
+  .solo { font-size: 14px; color: var(--on-ink-muted); margin: 0 0 20px; }
+  .offer-card.primary .link-arrow { color: var(--on-ink); }
+
+  /* flow */
+  .flow { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; counter-reset: step; }
+  @media (min-width: 900px) { .flow { grid-template-columns: repeat(5, 1fr); gap: 0; } }
+  .flow li {
+    position: relative; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 18px; counter-increment: step;
+  }
+  @media (min-width: 900px) {
+    .flow li { border-radius: 0; border-right-width: 0; }
+    .flow li:first-child { border-radius: 14px 0 0 14px; }
+    .flow li:last-child { border-radius: 0 14px 14px 0; border-right-width: 1px; }
+  }
+  .flow li::before { content: "0" counter(step); font-family: "Space Grotesk", sans-serif; font-size: 13px; color: var(--muted); }
+  .flow h4 { margin: 6px 0 4px; font-size: 18px; }
+  .flow p { margin: 0; font-size: 14px; color: var(--muted); word-break: keep-all; }
+  .flow .by { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--ink-2); background: var(--sand); padding: 3px 8px; border-radius: 6px; }
+  .flow li.human { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+  .flow li.human p, .flow li.human::before { color: var(--on-ink-muted); }
+  .flow li.human .by { background: rgba(255,255,255,.14); color: var(--on-ink); }
+  .flow-caption { margin-top: 20px; font-size: 15px; color: var(--ink-2); }
+
+  /* scenarios */
+  .scen { background: var(--surface); }
+  .scen-list { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .scen-list { grid-template-columns: repeat(3, 1fr); } }
+  .scen-item { border-top: 3px solid var(--ink); padding-top: 18px; }
+  .scen-item .who { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .scen-item h3 { font-size: 20px; margin: 4px 0 14px; word-break: keep-all; }
+  .ba { display: grid; gap: 8px; font-size: 15px; }
+  .ba div { word-break: keep-all; }
+  .ba .tag { display: inline-block; min-width: 44px; font-size: 12px; font-weight: 700; margin-right: 6px; }
+  .ba .before { color: var(--muted); }
+  .ba .after .tag { color: var(--ink); }
+
+  /* trust */
+  .trust-list { display: grid; gap: 28px; }
+  @media (min-width: 900px) { .trust-list { grid-template-columns: repeat(3, 1fr); } }
+  .trust-list h3 { font-size: 18px; margin: 0 0 6px; }
+  .trust-list p { margin: 0; color: var(--muted); font-size: 15px; word-break: keep-all; }
+
+  /* final cta */
+  .final { background: var(--ink); color: var(--on-ink); text-align: center; }
+  .final h2 { margin-left: auto; margin-right: auto; max-width: 18em; }
+  .final .sub { color: var(--on-ink-muted); margin-left: auto; margin-right: auto; }
+
+  footer { padding: 32px 0 48px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body class="show-notes">
+
+<div class="toolbar">
+  <div class="wrap">
+    <b>홈 시안 v1</b>
+    <span class="grp">헤드라인 후보:
+      <button type="button" data-h="0" aria-pressed="true">A</button>
+      <button type="button" data-h="1" aria-pressed="false">B</button>
+      <button type="button" data-h="2" aria-pressed="false">C</button>
+    </span>
+    <span class="grp"><button type="button" id="notes" aria-pressed="true">설계 메모 보기</button></span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="logo">AINSOFT</div>
+    <nav class="main" aria-label="주 메뉴">
+      <a href="#offer">제품</a>
+      <a href="#offer">AI 구축 서비스</a>
+      <a href="#scen">활용 사례</a>
+      <a href="#">회사 소개</a>
+      <a href="#">블로그</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#contact">도입 상담</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <p class="note">메뉴를 7개에서 5개로 줄였습니다. Products와 Solutions는 "제품"으로, Services는 "AI 구축 서비스"로 이름을 바꿨습니다. 오른쪽 위 "도입 상담"은 어느 페이지에서나 같은 자리에 둡니다. 히어로는 헤드라인, 한 문장, 버튼 하나만 남겼습니다.</p>
+      <p class="eyebrow">운영팀장 · CTO를 위한 운영 자동화</p>
+      <h1 id="headline">반복되는 운영 업무, 이제 사람 대신 흐름이 처리합니다.</h1>
+      <p class="lead">AINSOFT는 <strong>운영 자동화 제품</strong>(AISOpsFlow · Ainsoft RAG)과 현장에 맞춘 <strong>AI 구축 서비스</strong>를 제공합니다.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#contact">도입 상담 신청</a>
+        <a class="link-arrow" href="#flow">어떻게 동작하나요 →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="offer" id="offer">
+    <div class="wrap">
+      <p class="note">"무엇을 제공하는 회사인가"에 답하는 섹션입니다. 카드는 두 장만 둡니다. 묶음 제품을 우선하기 때문에 제품 카드를 더 크고 어둡게 했고, 개별 도입은 한 줄로만 안내합니다.</p>
+      <h2>AINSOFT가 제공하는 두 가지</h2>
+      <p class="sub">바로 도입하는 제품과, 우리 현장에 맞게 만드는 구축 서비스.</p>
+      <div class="offer-grid">
+        <article class="offer-card primary">
+          <div class="kind">제품</div>
+          <h3>운영 자동화 플랫폼</h3>
+          <p>반복되는 대응 절차는 자동으로 실행하고, 필요한 판단 근거는 바로 찾아줍니다.</p>
+          <div class="pair">
+            <div><b>AISOpsFlow</b><span>알림 → 승인 → 실행 → 보고 자동화</span></div>
+            <div><b>Ainsoft RAG</b><span>매뉴얼 · 정책 · 장애 이력 검색</span></div>
+          </div>
+          <p class="solo">함께 쓸 때 가장 강력하고, 하나씩 도입할 수도 있습니다.</p>
+          <a class="link-arrow" href="#">제품 자세히 보기 →</a>
+        </article>
+        <article class="offer-card">
+          <div class="kind">구축 서비스</div>
+          <h3>현장 맞춤 AI 구축</h3>
+          <p>공정 이미지, 안전관제 영상, 기술 문서를 읽는 AI를 고객 환경에 맞춰 설계하고 구축합니다.</p>
+          <a class="link-arrow" href="#">구축 서비스 보기 →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <p class="note">기존 Positioning, Products, Together 섹션 세 개를 그림 하나로 합쳤습니다. 두 제품이 각각 어느 단계를 맡는지 보여주고, 사람이 남는 단계는 "승인" 하나뿐이라는 점을 강조합니다. 기술 용어는 쓰지 않았습니다.</p>
+      <h2>알림이 오면, 다음 일은 흐름이 합니다</h2>
+      <p class="sub">운영팀은 반복 작업 대신 승인과 판단에만 집중합니다.</p>
+      <ol class="flow">
+        <li><h4>감지</h4><p>장애·티켓·이벤트 알림 수신</p><span class="by">AISOpsFlow</span></li>
+        <li><h4>근거 찾기</h4><p>관련 매뉴얼과 과거 처리 이력 자동 검색</p><span class="by">Ainsoft RAG</span></li>
+        <li class="human"><h4>승인</h4><p>담당자는 확인하고 승인만</p><span class="by">사람</span></li>
+        <li><h4>실행</h4><p>정해진 대응 절차를 자동 실행</p><span class="by">AISOpsFlow</span></li>
+        <li><h4>보고</h4><p>처리 결과를 채널로 자동 공유</p><span class="by">AISOpsFlow</span></li>
+      </ol>
+      <p class="flow-caption"><a class="link-arrow" href="#">개발자를 위한 아키텍처 문서 →</a></p>
+    </div>
+  </section>
+
+  <section class="scen" id="scen">
+    <div class="wrap">
+      <p class="note">공개할 수 있는 수치나 고객사가 아직 없으므로, 도입 전과 후를 비교하는 장면으로 설득합니다. 장면 하나는 문장 두 줄을 넘지 않게 합니다. 실제 사례가 생기면 이 자리를 교체합니다.</p>
+      <h2>이런 팀에서 달라집니다</h2>
+      <p class="sub">도입 전과 후, 운영팀의 하루가 어떻게 바뀌는지.</p>
+      <div class="scen-list">
+        <div class="scen-item">
+          <div class="who">IT 운영 · 관제</div>
+          <h3>새벽 장애 알림</h3>
+          <div class="ba">
+            <div class="before"><span class="tag">전</span>당직자가 매뉴얼을 찾고, 담당자에게 전화하고, 직접 조치</div>
+            <div class="after"><span class="tag">후</span>근거와 조치안이 함께 도착하고, 승인 한 번으로 실행</div>
+          </div>
+        </div>
+        <div class="scen-item">
+          <div class="who">서비스데스크</div>
+          <h3>매일 반복되는 티켓</h3>
+          <div class="ba">
+            <div class="before"><span class="tag">전</span>같은 유형의 요청을 사람이 하나씩 분류하고 처리</div>
+            <div class="after"><span class="tag">후</span>반복 티켓은 자동 처리, 예외만 정책 근거와 함께 사람에게</div>
+          </div>
+        </div>
+        <div class="scen-item">
+          <div class="who">규제 산업 · 온프레미스</div>
+          <h3>데이터를 밖으로 못 내보내는 환경</h3>
+          <div class="ba">
+            <div class="before"><span class="tag">전</span>보안 정책 때문에 자동화와 AI 도입을 미룸</div>
+            <div class="after"><span class="tag">후</span>실행과 검색 모두 사내에서, 권한 통제 안에서</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="note">CTO가 도입을 망설이는 이유(보안, 기존 시스템 연동, 종속성)에 미리 답하는 섹션입니다. 기존 상단 키워드 띠를 대신합니다.</p>
+      <h2>도입이 부담스럽지 않도록</h2>
+      <div class="trust-list">
+        <div><h3>데이터는 사내에</h3><p>실행 엔진은 고객 환경 안에서 동작하고, 클라우드와는 암호화된 채널로만 연결됩니다.</p></div>
+        <div><h3>권한대로만 검색</h3><p>문서 검색은 접근 권한을 따라, 볼 수 있는 사람에게만 보입니다.</p></div>
+        <div><h3>쓰던 도구 그대로</h3><p>Slack, 이메일, 카카오 등 기존 채널과 서비스에 붙여 씁니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="contact">
+    <div class="wrap">
+      <p class="note">페이지 맨 아래의 행동은 하나뿐입니다. 홈 전체에서 강조색은 "도입 상담" 버튼에만 씁니다.</p>
+      <h2>우리 팀의 반복 업무부터 함께 정리해보세요</h2>
+      <p class="sub">현재 운영 흐름을 들려주시면, 자동화할 수 있는 지점을 같이 찾아드립니다.</p>
+      <a class="btn btn-primary" href="#contact">도입 상담 신청</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© AINSOFT · 시안 v1 (2026-10-25) · 문구는 모두 초안입니다</div>
+</footer>
+
+<script>
+  const headlines = [
+    "반복되는 운영 업무, 이제 사람 대신 흐름이 처리합니다.",
+    "같은 장애에 같은 대응, 이제 한 번만 정의하세요.",
+    "운영팀이 반복하던 일을 AI 워크플로우로 바꿉니다."
+  ];
+  const h1 = document.getElementById("headline");
+  document.querySelectorAll("[data-h]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      h1.textContent = headlines[+btn.dataset.h];
+      document.querySelectorAll("[data-h]").forEach(b => b.setAttribute("aria-pressed", b === btn));
+    });
+  });
+  const notesBtn = document.getElementById("notes");
+  notesBtn.addEventListener("click", () => {
+    const on = document.body.classList.toggle("show-notes");
+    notesBtn.setAttribute("aria-pressed", on);
+  });
+</script>
+</body>
+</html>

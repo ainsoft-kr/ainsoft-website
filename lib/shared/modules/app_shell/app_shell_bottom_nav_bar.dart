@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/core/routing/route_manager.dart';
+import '/shared/design/app_font_config.dart';
 
 class AppShellBottomNavBar extends StatelessWidget {
   const AppShellBottomNavBar({super.key, required this.currentRoute});
@@ -11,30 +12,31 @@ class AppShellBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <BottomNavItem>[
+      // Contact lives in the header CTA, so it is not repeated here.
       const BottomNavItem(
-        label: 'Home',
+        label: '홈',
         route: RouteManager.initialRoute,
         icon: Icons.home_rounded,
       ),
       const BottomNavItem(
-        label: 'Products',
+        label: '제품',
         route: RouteManager.productsRoute,
         icon: Icons.grid_view_rounded,
       ),
       const BottomNavItem(
-        label: 'Solutions',
+        label: '구축 서비스',
+        route: RouteManager.servicesRoute,
+        icon: Icons.precision_manufacturing_rounded,
+      ),
+      const BottomNavItem(
+        label: '활용 사례',
         route: RouteManager.solutionsRoute,
         icon: Icons.lightbulb_rounded,
       ),
       const BottomNavItem(
-        label: 'Post',
+        label: '블로그',
         route: RouteManager.postsRoute,
         icon: Icons.article_rounded,
-      ),
-      const BottomNavItem(
-        label: 'Contact',
-        route: RouteManager.contactRoute,
-        icon: Icons.mail_rounded,
       ),
     ];
 
@@ -83,7 +85,7 @@ class AppShellBottomNavBar extends StatelessWidget {
                         color: active
                             ? const Color(0xFFC86E42)
                             : const Color(0xFF224142).withValues(alpha: 0.7),
-                      ),
+                      ).copyWith(fontFamilyFallback: appFontFallback),
                     ),
                   ],
                 ),

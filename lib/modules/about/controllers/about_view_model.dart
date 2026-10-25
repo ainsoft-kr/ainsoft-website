@@ -1,5 +1,4 @@
 import '/modules/about/data/about_content.dart';
-import '/modules/home/models/corporate_content_models.dart';
 
 class AboutViewModel {
   String get founderName => AboutContent.founderName;
@@ -13,14 +12,9 @@ class AboutViewModel {
   List<String> get founderIntroParagraphs =>
       AboutContent.founderIntroParagraphs;
 
-  List<String> get founderFocusTags => AboutContent.founderFocusTags;
+  List<String> get founderCareer => AboutContent.founderCareer;
 
-  List<CorporateInfoCardData> get founderHighlightCards =>
-      AboutContent.founderHighlightCards;
+  String get founderStack => AboutContent.founderStack;
 
-  List<CorporateInfoCardData> get overviewCards => AboutContent.overviewCards;
-
-  List<CorporateInfoCardData> get strengthCards => AboutContent.strengthCards;
-
-  List<CorporateMetricData> get snapshotMetrics => AboutContent.snapshotMetrics;
+  List<(String, String)> get principles => AboutContent.principles;
 }
