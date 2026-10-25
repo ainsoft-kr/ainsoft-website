@@ -122,7 +122,6 @@ class FooterLinkBlock extends StatelessWidget {
       (label: 'Solutions', route: RouteManager.solutionsRoute),
       (label: 'Services', route: RouteManager.servicesRoute),
       (label: 'Post', route: RouteManager.postsRoute),
-      (label: 'Contact', route: RouteManager.contactRoute),
     ];
 
     return Column(

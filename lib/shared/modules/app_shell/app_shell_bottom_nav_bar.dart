@@ -31,11 +31,6 @@ class AppShellBottomNavBar extends StatelessWidget {
         route: RouteManager.postsRoute,
         icon: Icons.article_rounded,
       ),
-      const BottomNavItem(
-        label: 'Contact',
-        route: RouteManager.contactRoute,
-        icon: Icons.mail_rounded,
-      ),
     ];
 
     return SafeArea(
